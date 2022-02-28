@@ -7,6 +7,7 @@
     "start": "node  .",
     "test": "jest -c jest.config.js --forceExit",
     "test:coverage": "jest -c jest.config.js --coverage --forceExit",
+    "docker": "docker-compose -f ./mongodb/docker-compose.yml up --build -d",
     "prepare": "husky install"
   },
   "keywords": [],
