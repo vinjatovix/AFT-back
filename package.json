@@ -1,0 +1,41 @@
+{
+  "name": "aft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node  .",
+    "test": "jest -c jest.config.js --forceExit",
+    "test:coverage": "jest -c jest.config.js --coverage --forceExit",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commit-message-validator",
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint -- --max-warnings=0 && npm run test:coverage"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,json}": [
+      "prettier --write",
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "config": {
+    "commit-message-validator": {
+      "pattern": "^\\[AFT-[\\d]+\\]\\s.*$",
+      "errorMessage": "Invalid commit message. Valid example: [AFT-123] Fix typo"
+    }
+  },
+  "devDependencies": {
+    "commit-message-validator": "^1.0.2",
+    "husky": "^7.0.4",
+    "jest": "^27.4.5",
+    "lint-staged": "^12.3.4"
+  }
+}
