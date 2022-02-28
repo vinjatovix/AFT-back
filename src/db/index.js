@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { DB } = require("../messages");
+const { throwError } = require("./throwError");
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_REPLICA_SET } = process.env;
 const password = encodeURIComponent(DB_PASSWORD);
@@ -14,4 +15,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+module.exports = { connectDB, throwError };
