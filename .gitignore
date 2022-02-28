@@ -1,1 +1,32 @@
 node_modules
+
+
+# Editor
+.vscode
+.devcontainer
+.DS_Store
+
+# Build
+/lib
+/dist
+
+# Logs
+*.log
+*.heapsnapshot
+
+# Dependencies
+node_modules
+yarn.lock
+
+# Test
+test-report.json
+coverage
+
+# Docker
+mongodb/data
+data
+.env
+
+
+
+
