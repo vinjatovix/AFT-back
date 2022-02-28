@@ -43,6 +43,7 @@
     "dotenv": "^16.0.0",
     "koa": "^2.13.4",
     "koa-json": "^2.0.2",
-    "mongoose": "^6.2.3"
+    "mongoose": "^6.2.3",
+    "mongoose-schema-jsonschema": "^2.0.2"
   }
 }
