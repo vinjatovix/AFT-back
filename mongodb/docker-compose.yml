@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  mongoaft:
+    image: "mongo:4.0.22-xenial"
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootPassword
+      MONGO_INITDB_DATABASE: aft
+    volumes:
+    - ./init.js:/docker-entrypoint-initdb.d/init.js:ro
+    - ./data/db:/data/db
+    - ./data/log:/var/log/mongodb
+    - ./data/dump:/data/dump
+    healthcheck:
+      test: test $$(echo "rs.initiate({_id:'rs0',members:[{_id:0,host:'localhost:27017'}]}).ok || rs.status().ok" | mongo -u root -p rootPassword --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+
