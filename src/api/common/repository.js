@@ -1,5 +1,5 @@
 const { throwError } = require("../../db");
-const { addConflictIdToError, createMetadata, getOptions } = require("./shared");
+const { addConflictIdToError, createMetadata, getOptions, loggerInfo } = require("./shared");
 
 const create = (Model, payload, user = "WIPuser", options = {}) => {
   const { populate } = getOptions(options);
@@ -11,6 +11,7 @@ const create = (Model, payload, user = "WIPuser", options = {}) => {
   })
     .save(options)
     .then(model => {
+      loggerInfo(options, Model.modelName, user, "create", model._id, payload);
       return Model.populate(model, populate || []);
     })
     .catch(error => addConflictIdToError(Model, error, payload.name))

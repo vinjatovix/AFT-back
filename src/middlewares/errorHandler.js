@@ -1,13 +1,12 @@
+const logger = require("../service/logger");
+
 const errorHandler = async (ctx, next) => {
   try {
     await next();
   } catch (error) {
-    res = {
-      message: (error.errors && error.errors[0]) || error.message,
-      details: { ...error }
-    };
+    logger.error(error);
     ctx.status = error.statusCode || error.status || 500;
-    ctx.body = res;
+    ctx.body = error;
   }
 };
 module.exports = { errorHandler };

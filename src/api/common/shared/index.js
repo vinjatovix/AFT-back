@@ -1,9 +1,11 @@
-const { getOptions } = require("./getOptions");
-const { createMetadata } = require("./createMetadata");
 const { addConflictIdToError } = require("./addConflictIdToError");
+const { createMetadata } = require("./createMetadata");
+const { getOptions } = require("./getOptions");
+const { loggerInfo } = require("./loggerInfo");
 
 module.exports = {
-  getOptions,
+  addConflictIdToError,
   createMetadata,
-  addConflictIdToError
+  getOptions,
+  loggerInfo
 };
