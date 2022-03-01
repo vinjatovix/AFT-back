@@ -46,8 +46,10 @@
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
+    "koa-logger-winston": "^0.0.2",
     "koa-router": "^10.1.1",
     "mongoose": "^6.2.3",
-    "mongoose-schema-jsonschema": "^2.0.2"
+    "mongoose-schema-jsonschema": "^2.0.2",
+    "winston": "^3.6.0"
   }
 }
