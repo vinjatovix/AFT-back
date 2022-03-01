@@ -44,7 +44,9 @@
     "dotenv": "^16.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
+    "koa-router": "^10.1.1",
     "mongoose": "^6.2.3",
     "mongoose-schema-jsonschema": "^2.0.2"
   }
