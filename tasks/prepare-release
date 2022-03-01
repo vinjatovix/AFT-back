@@ -1,0 +1,15 @@
+#!/bin/sh
+
+RELEASE_TYPE=$1
+
+CURRENT_VERSION=$(awk '/"version":/ {print $2}' package.json | perl -pe's/"//g' | perl -pe's/,//')
+
+VERSION=$(npm version --no-git-tag-version "$RELEASE_TYPE")
+NEW_VERSION=$(echo "$VERSION" | cut -c2-)
+
+echo "New version: $VERSION"
+
+perl -i -pe"s/version-$CURRENT_VERSION-/version-$NEW_VERSION-/" README.md
+
+echo ""
+echo "Several files have been updated: README.md, package.json and package-lock.json."
