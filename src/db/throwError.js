@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
-const { connectDB } = require(".");
+const { connectDB } = require("./connectDB");
 const { throwAftError } = require("../services/throwAftError");
+const { dbErrors } = require("./dbErrors");
 
 const throwError = (error, info) => {
   if (!mongoose.connection.readyState) {
     connectDB();
   }
 
-  const code = error.code || -400;
+  const code = error.code || dbErrors.BAD_REQUEST;
   const message = error.errmsg || error.message || error;
   const mongoInfo = {
     _id: error._id,
@@ -15,21 +16,21 @@ const throwError = (error, info) => {
     driver: error.driver,
     name: error.name
   };
-  if (code === 13) {
+  if (code === dbErrors.UNAUTHORIZED) {
     throwAftError("MONGO_UNAUTHORIZED", {
       replace: { message },
       info,
       mongoInfo
     });
   }
-  if (code === 11000) {
+  if (code === dbErrors.CONFLICT) {
     throwAftError("MONGO_WRITING_ERROR", {
       replace: { message, _id: error._id },
       info,
       mongoInfo
     });
   }
-  if (code === -400) {
+  if (code === dbErrors.BAD_REQUEST) {
     throwAftError("MONGO_VALIDATION_ERROR", {
       replace: { message },
       info,
