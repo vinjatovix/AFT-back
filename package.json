@@ -1,6 +1,6 @@
 {
   "name": "aft",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "test": "jest -c jest.config.js --forceExit",
     "test:coverage": "jest -c jest.config.js --coverage --forceExit",
     "docker": "docker-compose -f ./mongodb/docker-compose.yml up --build -d",
+    "prepare-release": "./tasks/prepare-release",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -48,6 +49,7 @@
     "koa-json": "^2.0.2",
     "koa-logger-winston": "^0.0.2",
     "koa-router": "^10.1.1",
+    "migrate-mongo": "^8.2.3",
     "mongoose": "^6.2.3",
     "mongoose-schema-jsonschema": "^2.0.2",
     "winston": "^3.6.0"
