@@ -1,7 +1,8 @@
+const authorization = require("./authorization");
 const general = require("./general");
 const mongoose = require("./mongoose");
 
-const configModules = [general, mongoose];
+const configModules = [authorization, general, mongoose];
 
 const errorValidation = {};
 
