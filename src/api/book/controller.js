@@ -6,6 +6,12 @@ const create = async (ctx, next) => {
   ctx.status = httpStatusCodes.HTTP_CREATED;
   await next();
 };
+
+const findAll = async (ctx, next) => {
+  ctx.body = await Service.findAll();
+  await next();
+};
 module.exports = {
-  create
+  create,
+  findAll
 };
