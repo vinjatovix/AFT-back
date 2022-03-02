@@ -1,4 +1,5 @@
 {
   "migrations": true,
+  "defaultLimit": 20,
   "aft": { "allowedRoles": ["aft.admin", "aft.editor", "aft.user"] }
 }
