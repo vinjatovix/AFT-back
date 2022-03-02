@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node  .",
-    "test": "jest -c jest.config.js --forceExit",
+    "test": "jest -c jest.config.js --detectOpenHandles",
     "test:coverage": "jest -c jest.config.js --coverage --forceExit",
+    "test:ci": "jest --ci --reporters='default' --reporters='./github-actions-reporter'",
     "docker": "docker-compose -f ./mongodb/docker-compose.yml up --build -d",
     "prepare-release": "./tasks/prepare-release",
     "prepare": "husky install"
