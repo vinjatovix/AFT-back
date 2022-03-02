@@ -1,10 +1,33 @@
 const { throwAftError } = require("../../../src/services/throwAftError");
+const { errorCodes, errorValidation } = require("../../../src/services/errorCodes");
 
 const id = "someId";
 const modelName = "someModel";
 const message = "errorMessage";
 
 describe("throwAftError", () => {
+  describe("errorCodes", () => {
+    it("Check that error codes have been created correctly.", () => {
+      const errors = {
+        ids: new Set(),
+        codes: new Set()
+      };
+      expect(errorCodes({}).length > 0).toBeTruthy();
+      errorCodes({}).forEach(err => {
+        errors.ids.add(err.id);
+        errors.codes.add(err.code);
+        expect(errorValidation[err.module](err.code)).toBe(true);
+        expect(err).toMatchObject({
+          code: expect.any(String),
+          id: expect.any(String),
+          message: expect.any(String),
+          status: expect.any(Number)
+        });
+      });
+      expect(errorCodes({})).toHaveLength(errors.ids.size);
+      expect(errorCodes({})).toHaveLength(errors.codes.size);
+    });
+  });
   describe("General errors", () => {
     it("should fail with code E31 and status 404 in case of model not found", () => {
       expect(

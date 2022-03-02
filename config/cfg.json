@@ -1,3 +1,4 @@
 {
-  "migrations": true
+  "migrations": true,
+  "aft": { "allowedRoles": ["aft.admin", "aft.editor", "aft.user"] }
 }
