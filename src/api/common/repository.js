@@ -1,5 +1,6 @@
 const { throwError } = require("../../db");
 const { addConflictIdToError, createMetadata, getOptions, loggerInfo, updatedMetadata } = require("./shared");
+const { defaultLimit } = require("../../../config/cfg.json");
 
 const create = (Model, payload, user, options = {}) => {
   const { populate } = getOptions(options);
@@ -18,7 +19,21 @@ const create = (Model, payload, user, options = {}) => {
     .catch(throwError);
 };
 
-const findOneByQuery = (Model, query, options = {}) => {
+const findByQuery = (Model, query, options = { lean: true }) => {
+  const { select, populate, lean, sort, limit = defaultLimit, skip } = getOptions(options);
+
+  return Model.find(query)
+    .select(select)
+    .populate(populate)
+    .sort(sort || "-metadata.updatedAt")
+    .limit(limit || Number(options.limit))
+    .skip(skip)
+    .lean(lean)
+    .exec()
+    .catch(throwError);
+};
+
+const findOneByQuery = (Model, query, options = { lean: true }) => {
   const { select, populate, lean, session, sort } = getOptions(options);
   return Model.findOne(query)
     .select(select)
@@ -41,4 +56,4 @@ const updateOne = (Model, query, payload, user, options = {}) => {
     .catch(error => throwError(error, { query, name: Model.modelName }));
 };
 
-module.exports = { create, findOneByQuery, updateOne };
+module.exports = { create, findByQuery, findOneByQuery, updateOne };
