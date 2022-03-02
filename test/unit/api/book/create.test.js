@@ -34,10 +34,13 @@ describe("Book module - create", () => {
     });
     expect(status).toBe(400);
     expect(body).toMatchObject({
-      message: "Book validation failed: author: Path `author` is required.",
-      details: {
-        id: "MONGO_VALIDATION_ERROR"
-      }
+      module: "mongoose",
+      code: "E201",
+      id: "MONGO_VALIDATION_ERROR",
+      message: "Mongoose validation error",
+      errors: ["Book validation failed: author: Path `author` is required."],
+      status: 400,
+      level: "error"
     });
   });
 
@@ -47,10 +50,13 @@ describe("Book module - create", () => {
     });
     expect(status).toBe(400);
     expect(body).toMatchObject({
-      message: "Book validation failed: name: Path `name` is required.",
-      details: {
-        id: "MONGO_VALIDATION_ERROR"
-      }
+      module: "mongoose",
+      code: "E201",
+      id: "MONGO_VALIDATION_ERROR",
+      message: "Mongoose validation error",
+      errors: ["Book validation failed: name: Path `name` is required."],
+      status: 400,
+      level: "error"
     });
   });
 });

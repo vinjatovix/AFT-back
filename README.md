@@ -12,10 +12,13 @@
 ## Introduction and motivation
 
 REST API for the management of Productions tasks on AFT
+
 ## Architecture and Technical Design
+
 WIP
 
 ## Getting started
+
 WIP
 
 ### Prerequisites
@@ -25,7 +28,10 @@ WIP
 - [EditorConfig editor plugin](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
 ### First steps
+
 WIP
+At the moment, the first AFT admin user must be manually created by a DB admin.
+AFT admin user can create another admins, editors or normal users as well.
 
 ### Local development
 
@@ -51,6 +57,7 @@ $ npm start
 ```sh
 $ npm run test:coverage
 ```
+
 <!--
 ### Folder structure
 
@@ -73,6 +80,7 @@ $ npm run prepare-release -- major
 $ npm run prepare-release -- minor
 $ npm run prepare-release -- patch
 ```
+
 <!-- ## Contributors
 
 ## 🤝 Contributing -->
