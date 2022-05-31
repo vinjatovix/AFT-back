@@ -13,6 +13,7 @@ const { errorHandler } = require("../middlewares");
 
 const authRouter = require("../api/authentication/router").routes();
 const bookRouter = require("../api/book/router").routes();
+const characterRouter = require("../api/character/router").routes();
 
 const service = new Koa();
 
@@ -23,6 +24,7 @@ service
   .use(bodyParser())
   .use(errorHandler)
   .use(authRouter)
-  .use(bookRouter);
+  .use(bookRouter)
+  .use(characterRouter);
 
 module.exports = service;
