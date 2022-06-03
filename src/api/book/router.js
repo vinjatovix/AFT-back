@@ -8,6 +8,9 @@ bookRouter
   .prefix("/api/v1/book")
   .use(tokenAuth, getCredentials)
   .get("/", authAnyRole, Controller.findAll)
-  .post("/", authEditor, Controller.create);
+  .get("/:slug", authAnyRole, Controller.findBySlug)
+  .post("/", authEditor, Controller.create)
+  .patch("/:slug", authEditor, Controller.findOneAndUpdate)
+  .del("/:slug", authEditor, Controller.findOneAndDelete);
 
 module.exports = bookRouter;

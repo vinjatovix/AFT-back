@@ -1,5 +1,13 @@
 const { throwError } = require("../../db");
-const { addConflictIdToError, createMetadata, getOptions, loggerInfo, updatedMetadata } = require("./shared");
+const {
+  addConflictIdToError,
+  createMetadata,
+  getOptions,
+  loggerInfo,
+  updatedMetadata,
+  toJSON,
+  checkIfExist
+} = require("./shared");
 const { defaultLimit } = require("../../../config/cfg.json");
 
 const create = (Model, payload, user, options = {}) => {
@@ -41,19 +49,33 @@ const findOneByQuery = (Model, query, options = { lean: true }) => {
     .populate(populate)
     .sort(sort)
     .session(session)
-    .then(doc => (options.exists ? checkIfExist(doc, query, "find") : doc))
+    .then(doc => (options.exists ? checkIfExist(doc, query, "find", Model.modelName) : doc))
     .catch(throwError);
 };
 
-const updateOne = (Model, query, payload, user, options = {}) => {
+const findOneAndUpdate = (Model, query, payload, user, options = {}) => {
   const metadata = updatedMetadata(user, payload.metadata);
   delete payload.metadata;
-  return Model.updateOne(query, { ...payload, $set: { ...(payload.$set || {}), ...metadata } }, options)
+  return Model.findOneAndUpdate(
+    query,
+    { ...payload, $set: { ...(payload.$set || {}), ...metadata } },
+    { new: true, runValidators: true, ...options }
+  )
     .then(doc => {
-      loggerInfo(options, Model.modelName, user, "updateOne", query, payload);
-      return doc;
+      checkIfExist(doc, JSON.stringify(query), "find", Model.modelName);
+      loggerInfo(options, Model.modelName, user, "findOneAndUpdate", query, payload);
+      return options.json ? toJSON(doc) : doc;
     })
     .catch(error => throwError(error, { query, name: Model.modelName }));
 };
 
-module.exports = { create, findByQuery, findOneByQuery, updateOne };
+const findOneAndDelete = (Model, query, user, options = {}) => {
+  return Model.findOneAndDelete(query, { ...options, user })
+    .then(doc => {
+      loggerInfo(options, Model.modelName, user, "removeOne", query);
+      return options.json ? toJSON(doc) : doc;
+    })
+    .catch(error => throwError(error, { query, name: Model.modelName }));
+};
+
+module.exports = { create, findByQuery, findOneByQuery, findOneAndUpdate, findOneAndDelete };
