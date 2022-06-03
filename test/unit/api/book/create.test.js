@@ -59,4 +59,26 @@ describe("Book module - create", () => {
       level: "error"
     });
   });
+
+  it("should fail because aft.user is not a valid role", async () => {
+    const { status, body } = await httpRequest(
+      "POST",
+      getUrl(),
+      {
+        name,
+        author
+      },
+      "user"
+    );
+
+    expect(status).toBe(403);
+    expect(body).toMatchObject({
+      module: "authorization",
+      code: "E4",
+      id: "INVALID_ROLE",
+      message: "Role not allowed",
+      status: 403,
+      level: "error"
+    });
+  });
 });
