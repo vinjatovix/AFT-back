@@ -9,5 +9,17 @@ const MetadataSchema = {
 };
 
 const patternId = "^[0-9a-fA-F]{24}$";
+const patternName = "^[a-zA-Z0-9-._](?!.*::)[a-zA-Z0-9-._:]*[a-zA-Z0-9-._]$";
 
-module.exports = { MetadataSchema, patternId };
+const getQueryBySlug = function (slug, UniqueIdentifiers) {
+  if (new RegExp(patternId).test(slug)) {
+    return { _id: slug };
+  }
+  const filter = UniqueIdentifiers.map(attribute => ({ [attribute]: slug }));
+
+  return filter.length > 1 ? { $or: filter } : filter[0];
+};
+
+const getUniqueIdentifiers = Model => Object.keys(Model.schema.obj).filter(key => Model.schema.obj[key].unique);
+
+module.exports = { MetadataSchema, patternId, patternName, getQueryBySlug, getUniqueIdentifiers };
