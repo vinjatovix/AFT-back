@@ -26,8 +26,7 @@ describe("Book module - delete", () => {
       code: "E4",
       id: "INVALID_ROLE",
       message: "Role not allowed",
-      status: 403,
-      level: "error"
+      status: 403
     });
   });
 });

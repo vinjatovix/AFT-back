@@ -11,6 +11,7 @@ characterRouter
   .get("/:id", authAnyRole, Controller.findById)
   .post("/", authEditor, Controller.create)
   .patch("/:id", authEditor, Controller.findOneAndUpdate)
-  .del("/:id", authEditor, Controller.findOneAndDelete);
+  .del("/:id", authEditor, Controller.findOneAndDelete)
+  .get("/book/:id", authAnyRole, Controller.findByBookId);
 
 module.exports = characterRouter;

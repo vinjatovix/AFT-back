@@ -51,7 +51,6 @@ describe("Work module - create", () => {
       message: "Mongoose validation error",
       errors: ["Work validation failed: scene: Path `scene` is required."],
       status: 400,
-      level: "error"
     });
   });
 
@@ -74,7 +73,6 @@ describe("Work module - create", () => {
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
       status: 400,
-      level: "error"
     });
   });
 
@@ -97,8 +95,7 @@ describe("Work module - create", () => {
       code: "E201",
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
-      status: 400,
-      level: "error"
+      status: 400
     });
   });
 
