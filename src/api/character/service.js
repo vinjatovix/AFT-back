@@ -6,9 +6,11 @@ const findAll = async options => Repository.findByQuery({}, { lean: true, ...opt
 
 const findById = async (modelId, options) => Repository.findById(modelId, { lean: true, ...options });
 
+const findByBookId = async (bookId, options) => Repository.findByQuery({ book: bookId }, { lean: true, ...options });
+
 const findOneAndUpdate = async (modelId, payload, user, options) =>
   Repository.findOneAndUpdate(modelId, payload, user, options);
 
 const findOneAndDelete = async (modelId, user, options) => Repository.findOneAndDelete(modelId, user, options);
 
-module.exports = { create, findAll, findOneAndUpdate, findOneAndDelete, findById };
+module.exports = { create, findAll, findOneAndUpdate, findOneAndDelete, findById, findByBookId };

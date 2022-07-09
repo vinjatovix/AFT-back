@@ -40,7 +40,6 @@ describe("Book module - create", () => {
       message: "Mongoose validation error",
       errors: ["Book validation failed: author: Path `author` is required."],
       status: 400,
-      level: "error"
     });
   });
 
@@ -56,7 +55,6 @@ describe("Book module - create", () => {
       message: "Mongoose validation error",
       errors: ["Book validation failed: name: Path `name` is required."],
       status: 400,
-      level: "error"
     });
   });
 
@@ -78,7 +76,6 @@ describe("Book module - create", () => {
       id: "INVALID_ROLE",
       message: "Role not allowed",
       status: 403,
-      level: "error"
     });
   });
 });
