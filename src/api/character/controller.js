@@ -17,6 +17,11 @@ const findById = async (ctx, next) => {
   await next();
 };
 
+const findByBookId = async (ctx, next) => {
+  ctx.body = await Service.findByBookId(ctx.params.id);
+  await next();
+};
+
 const findOneAndUpdate = async (ctx, next) => {
   ctx.body = await Service.findOneAndUpdate(ctx.params.id, ctx.request.body, ctx.state.userData.username);
   ctx.status = httpStatusCodes.HTTP_OK;
@@ -34,5 +39,6 @@ module.exports = {
   findAll,
   findById,
   findOneAndUpdate,
-  findOneAndDelete
+  findOneAndDelete,
+  findByBookId
 };

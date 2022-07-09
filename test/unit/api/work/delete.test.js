@@ -22,7 +22,6 @@ describe("Work module - delete", () => {
       id: "INVALID_ROLE",
       message: "Role not allowed",
       status: 403,
-      level: "error"
     });
   });
 });

@@ -39,7 +39,6 @@ describe("Scene module - update", () => {
       code: "E4",
       id: "INVALID_ROLE",
       message: "Role not allowed",
-      level: "error"
     });
   });
 });

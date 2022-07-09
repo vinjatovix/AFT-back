@@ -26,9 +26,12 @@ const characterSchema = new Schema(
       required: true,
       index: true,
       validate: {
-        validator: center =>
-        allowedCenters.includes(center)
+        validator: center => allowedCenters.includes(center)
       }
+    },
+    description: {
+      type: String,
+      trim: true
     },
     metadata: {
       type: Metadata,

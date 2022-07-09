@@ -50,8 +50,7 @@ describe("Character module - create", () => {
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
       errors: ["Character validation failed: name: Path `name` is required."],
-      status: 400,
-      level: "error"
+      status: 400
     });
   });
 
@@ -75,8 +74,7 @@ describe("Character module - create", () => {
       errors: [
         `Character validation failed: center: \`${char.center}\` is not a valid enum value for path \`center\`.`
       ],
-      status: 400,
-      level: "error"
+      status: 400
     });
   });
 
@@ -117,8 +115,7 @@ describe("Character module - create", () => {
       code: "E4",
       id: "INVALID_ROLE",
       message: "Role not allowed",
-      status: 403,
-      level: "error"
+      status: 403
     });
   });
 });
