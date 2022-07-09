@@ -47,7 +47,6 @@ describe("Scene module - create", () => {
       message: "Mongoose validation error",
       errors: ["Scene validation failed: name: Path `name` is required."],
       status: 400,
-      level: "error"
     });
   });
 
@@ -69,7 +68,6 @@ describe("Scene module - create", () => {
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
       status: 400,
-      level: "error"
     });
   });
 
@@ -90,7 +88,6 @@ describe("Scene module - create", () => {
       code: "E4",
       id: "INVALID_ROLE",
       message: "Role not allowed",
-      level: "error"
     });
 
     expect(Repository.create).not.toHaveBeenCalled();
