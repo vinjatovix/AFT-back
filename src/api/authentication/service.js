@@ -38,14 +38,15 @@ const _updateWithSession = async ({ password, newPassword, repeatNewPassword }, 
   }
   const { password: dbPassword } = await Repository.findOneByQuery({ username }, { select: ["password"], lean: true });
   await validatePassword(password, dbPassword);
-  await Repository.updateOne(
+  const res = await Repository.findOneAndUpdate(
     { username },
     { password: encryptPassword(newPassword), metadata: { updatedAt: new Date(), updatedBy: username } },
     username,
     options
   );
+  delete res.password;
 
-  return username;
+  return res;
 };
 
 module.exports = { create, login, update };
