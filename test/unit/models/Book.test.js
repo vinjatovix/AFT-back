@@ -7,6 +7,7 @@ describe("Book model", () => {
       _id: "5ccadc4295bd1464f2d59446",
       name: "Closer",
       author: "some author",
+      description: "some description",
       metadata: createMetadata("user")
     });
     await expect(book.validate()).resolves.toBeUndefined();
@@ -16,6 +17,7 @@ describe("Book model", () => {
     const book = new Book({
       _id: "5ccadc4295bd1464f2d59446",
       author: "some author",
+      description: "some description",
       metadata: createMetadata("user")
     });
     await expect(book.validate()).rejects.toThrow("Book validation failed: name: Path `name` is required.");
@@ -25,8 +27,21 @@ describe("Book model", () => {
     const book = new Book({
       _id: "5ccadc4295bd1464f2d59446",
       name: "closer",
+      description: "some description",
       metadata: createMetadata("user")
     });
     await expect(book.validate()).rejects.toThrow("Book validation failed: author: Path `author` is required.");
+  });
+
+  it("should fail if no description is provided", async () => {
+    const book = new Book({
+      _id: "5ccadc4295bd1464f2d59446",
+      name: "closer",
+      author: "some author",
+      metadata: createMetadata("user")
+    });
+    await expect(book.validate()).rejects.toThrow(
+      "Book validation failed: description: Path `description` is required."
+    );
   });
 });
