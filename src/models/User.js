@@ -25,6 +25,9 @@ const userSchema = new Schema(
         }
       }
     ],
+    group: {
+      type: String
+    },
     metadata: {
       type: Metadata,
       required: true
