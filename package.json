@@ -41,6 +41,7 @@
     "husky": "^7.0.4",
     "jest": "^27.4.5",
     "madge": "^5.0.1",
+    "migrate-mongo": "^9.0.0",
     "supertest": "^6.2.2"
   },
   "dependencies": {
@@ -55,7 +56,6 @@
     "koa-logger-winston": "^0.0.2",
     "koa-router": "^10.1.1",
     "koa2-swagger-ui": "^5.3.0",
-    "migrate-mongo": "^8.2.3",
     "mongoose": "^6.2.3",
     "mongoose-schema-jsonschema": "^2.0.2",
     "winston": "^3.6.0"
