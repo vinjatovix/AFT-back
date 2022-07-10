@@ -24,7 +24,7 @@ const up = async () => {
     const { db, client } = await database.connect();
     try {
       const migrated = await migrationUp(db, client);
-      migrated.forEach(fileName => logger.info(`Migrated: ${fileName}`));
+      migrated.forEach(fileName => logger.info(`CHANGELOG: ${fileName}`));
     } catch ({ message }) {
       logger.error({ message });
     } finally {
