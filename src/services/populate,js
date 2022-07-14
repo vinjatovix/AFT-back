@@ -1,0 +1,69 @@
+const getPopulateOptions = fields => {
+  let paths = [];
+
+  _parseCompositionsFields(fields).forEach(field => {
+    const populateObject = {};
+    field.split(".").reduce((populateLevel, fieldLevel, index) => {
+      const populate = _mapFieldToPath(fieldLevel);
+      if (index && Array.isArray(populate)) {
+        populateObject.populate = populate.map(item => ({ ...populateLevel, populate: item }));
+        return populateObject;
+      }
+      populateLevel.populate = populate;
+      return populateLevel.populate;
+    }, populateObject);
+
+    paths = [
+      ...paths,
+      ...(Array.isArray(populateObject.populate) ? populateObject.populate : [populateObject.populate])
+    ];
+  });
+  const populateMap = {};
+  paths.forEach(path => _getFieldsInPath(populateMap, path));
+
+  return _getPopulateValues(populateMap);
+};
+
+const _getFieldsInPath = (populateMap, path) => {
+  if (path) {
+    populateMap[path.path] = populateMap[path.path] || { ...path, populate: {} };
+    if (path.populate) {
+      _getFieldsInPath(populateMap[path.path].populate, path.populate);
+    }
+  }
+};
+
+const _getPopulateValues = populatesMap => {
+  return Object.values(populatesMap).map(populate => ({
+    ...populate,
+    populate: _getPopulateValues(populate.populate)
+  }));
+};
+const _parseCompositionsFields = fields => {
+  let allFields = [...fields];
+  const compositionsIndex = allFields.indexOf("compositions");
+  if (compositionsIndex > -1) {
+    allFields.splice(compositionsIndex, 1); // Remove compositions from includes
+    allFields = [...allFields, ...compositionsPopulate];
+    if (fields.includes("mirrorOf")) {
+      allFields = [
+        ...allFields,
+        ...compositionsPopulate.map(compositionsPopulate => `mirrorOf.${compositionsPopulate}`)
+      ];
+    }
+  }
+  return allFields;
+};
+
+const _mapFieldToPath = fieldLevel => {
+  switch (fieldLevel) {
+    case "book":
+      return { path: "book" };
+    case "characters":
+      return { path: "characters" };
+    default:
+      return { path: fieldLevel };
+  }
+};
+
+module.exports = { getPopulateOptions };

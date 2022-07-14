@@ -18,11 +18,7 @@ module.exports = new Schema(
     updatedBy: {
       type: String,
       required: true
-    },
-    publishedAt: { type: Date },
-    publishedBy: { type: String },
-    requestedAt: { type: Date },
-    requestedBy: { type: String }
+    }
   },
   { _id: false, versionKey: false }
 );

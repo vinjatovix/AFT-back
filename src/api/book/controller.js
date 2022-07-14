@@ -2,18 +2,33 @@ const { httpStatusCodes } = require("../../service/httpStatusCodes");
 const Service = require("./service");
 
 const create = async (ctx, next) => {
-  ctx.body = await Service.create(ctx.request.body, ctx.state.userData.username);
+  const { select, populate } = ctx.state || {};
+  ctx.body = await Service.create(ctx.request.body, ctx.state.userData.username, {
+    populate,
+    select
+  });
   ctx.status = httpStatusCodes.HTTP_CREATED;
   await next();
 };
 
 const findAll = async (ctx, next) => {
-  ctx.body = await Service.findAll();
+  const { sort } = ctx.query || {};
+  const { filter = {}, select, pagination, populate } = ctx.state || {};
+  ctx.body = await Service.findAll(filter, {
+    populate,
+    sort,
+    select,
+    pagination
+  });
   await next();
 };
 
 const findBySlug = async (ctx, next) => {
-  ctx.body = await Service.findBySlug(ctx.params.slug);
+  const { select, populate } = ctx.state || {};
+  ctx.body = await Service.findBySlug(ctx.params.slug, {
+    populate,
+    select
+  });
   await next();
 };
 

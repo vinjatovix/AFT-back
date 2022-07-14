@@ -59,6 +59,8 @@
     "koa2-swagger-ui": "^5.3.0",
     "mongoose": "^6.2.3",
     "mongoose-schema-jsonschema": "^2.0.2",
+    "qs": "^6.11.0",
+    "querystring": "^0.2.1",
     "winston": "^3.6.0"
   }
 }
