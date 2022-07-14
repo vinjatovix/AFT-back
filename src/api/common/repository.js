@@ -41,7 +41,7 @@ const findByQuery = (Model, query, options = { lean: true }) => {
     .catch(throwError);
 };
 
-const findOneByQuery = (Model, query, options = { lean: true }) => {
+const findOneByQuery = (Model, query, user, options = { lean: true }) => {
   const { select, populate, lean, session, sort } = getOptions(options);
   return Model.findOne(query)
     .select(select)
@@ -49,7 +49,11 @@ const findOneByQuery = (Model, query, options = { lean: true }) => {
     .populate(populate)
     .sort(sort)
     .session(session)
-    .then(doc => (options.exists ? checkIfExist(doc, query, "find", Model.modelName) : doc))
+    .then(doc => {
+      checkIfExist(doc, JSON.stringify(query), "find", Model.modelName);
+      loggerInfo(options, Model.modelName, user, "findOneByQuery", query);
+      return options.json ? toJSON(doc) : doc;
+    })
     .catch(throwError);
 };
 
