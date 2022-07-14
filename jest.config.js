@@ -9,7 +9,5 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.js"],
   coverageReporters: ["text", "html", "lcov", "clover"],
   watchPathIgnorePatterns: ["<rootDir>/test-report.json"],
-  reporters: ["default"],
-  testRegex: "/test/.*\\.test\\.js$",
-  watchPathIgnorePatterns: ["<rootDir>/test-report.json", "<rootDir>/docker/"]
+  reporters: ["default"]
 };
