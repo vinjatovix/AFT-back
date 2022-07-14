@@ -1,32 +1,64 @@
-const { makeExample } = require("../../common/swagger");
-const { HTTP_BAD_REQUEST, HTTP_CREATED } = require("../../../service/httpStatusCodes").httpStatusCodes;
+const Book = require("../../../models/Book");
+const { createMetadata } = require("../../common/shared");
+const {
+  makeExample,
+  unauthorizedResponse,
+  notFoundResponse,
+  badRequestResponse,
+  duplicatedResponse
+} = require("../../common/swagger");
+const { HTTP_BAD_REQUEST, HTTP_CREATED, HTTP_OK, HTTP_NOT_FOUND, HTTP_CONFLICT, HTTP_UNAUTHORIZED } =
+  require("../../../service/httpStatusCodes").httpStatusCodes;
 
-const BookSchema = { type: "object", properties: { name: { type: "string" }, author: { type: "string" } } };
+const BookModel = Book.jsonSchema();
 
-const CreatedBookExample = {
-  _id: "62227589817ba593cd7631a9",
-  name: "Inventos",
-  author: "Eugenio Tarconi",
-  metadata: {
-    createdAt: "2022-03-04T20:24:41.718Z",
-    createdBy: "userAdmin",
-    updatedAt: "2022-03-04T20:24:41.718Z",
-    updatedBy: "userAdmin"
+const BookSchema = {
+  ...BookModel,
+  example: {
+    name: "Inventos",
+    author: "Eugenio Tarconi",
+    img: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+    description: "Obra guapa"
   }
 };
 
-const BadRequestCreateExample = {
-  status: HTTP_BAD_REQUEST,
-  code: "E201",
-  errors: ["Book validation failed: author: Path `author` is required."]
+const CreatedBookExample = {
+  _id: "62227589817ba593cd7631a9",
+  ...BookSchema.example,
+  metadata: createMetadata("GOD")
+};
+
+const responses = {
+  unauthorized: { [HTTP_UNAUTHORIZED]: makeExample("Unauthorized", unauthorizedResponse()) },
+  notFound: { [HTTP_NOT_FOUND]: makeExample("Not Found", notFoundResponse("62c062af519e0805cbdeefaa", "Book")) },
+  badRequest: { [HTTP_BAD_REQUEST]: makeExample("Bad Request", badRequestResponse("Book", "author")) },
+  conflict: { [HTTP_CONFLICT]: makeExample("Conflict", duplicatedResponse("books", "name")) }
 };
 
 module.exports = {
   BookSchema,
   responses: {
+    getBooks: {
+      [HTTP_OK]: makeExample("Get Books", [CreatedBookExample]),
+      ...responses.unauthorized
+    },
     postBook: {
       [HTTP_CREATED]: makeExample("Book created", CreatedBookExample),
-      [HTTP_BAD_REQUEST]: makeExample("Bad request", BadRequestCreateExample)
+      ...responses.badRequest,
+      ...responses.conflict,
+      ...responses.unauthorized
+    },
+    patchBook: {
+      [HTTP_OK]: makeExample("Book updated", CreatedBookExample),
+      ...responses.badRequest,
+      ...responses.conflict,
+      ...responses.notFound,
+      ...responses.unauthorized
+    },
+    getBookBySlug: {
+      [HTTP_OK]: makeExample("Get Book by Slug", CreatedBookExample),
+      ...responses.notFound,
+      ...responses.unauthorized
     }
   }
 };

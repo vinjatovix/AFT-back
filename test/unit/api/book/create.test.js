@@ -3,6 +3,7 @@ const httpRequest = require("../../../fixtures/httpRequest")();
 const Book = require("../../../../src/models/Book");
 const Repository = require("../../../../src/api/book/repository");
 const validateModel = require("../../../fixtures/validateModel");
+const { BookSchema } = require("../../../../src/api/book/swagger");
 const getUrl = () => `/api/v1/book`;
 
 jest.mock("../../../../src/db/connectDB", () => ({
@@ -21,15 +22,14 @@ describe("Book module - create", () => {
     });
   });
 
-  it("should create a book", async () => {
+  it("swagger example should pass", async () => {
+    const example = BookSchema.example;
     const { status, body } = await httpRequest("POST", getUrl(), {
-      name,
-      author,
-      description
+      ...example
     });
 
     expect(status).toBe(201);
-    expect(body).toMatchObject({ name, author });
+    expect(body).toMatchObject({ ...BookSchema.example });
   });
 
   it("should fail validation cause no author is provided", async () => {
