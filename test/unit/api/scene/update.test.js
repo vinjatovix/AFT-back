@@ -1,4 +1,4 @@
-const faker = require("faker");
+const random = require("../../../shared/random");
 const { ObjectId } = require("mongoose").Types;
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Repository = require("../../../../src/api/scene/repository");
@@ -14,9 +14,9 @@ describe("Scene module - update", () => {
 
   it("should update a scene", async () => {
     const scene = {
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()]
     };
     const { status } = await httpRequest("PATCH", getUrl(scene.name), scene);
@@ -26,9 +26,9 @@ describe("Scene module - update", () => {
 
   it("should fail because aft.user is not a valid role", async () => {
     const scene = {
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()]
     };
     const { status, body } = await httpRequest("PATCH", getUrl(scene.name), scene, "user");
@@ -38,7 +38,7 @@ describe("Scene module - update", () => {
       module: "authorization",
       code: "E4",
       id: "INVALID_ROLE",
-      message: "Role not allowed",
+      message: "Role not allowed"
     });
   });
 });

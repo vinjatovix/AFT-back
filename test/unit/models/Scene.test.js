@@ -1,15 +1,15 @@
 const { ObjectId } = require("mongoose").Types;
 const { createMetadata } = require("../../../src/api/common/shared");
 const Scene = require("../../../src/models/Scene");
-const faker = require("faker");
+const random = require("../../shared/random");
 
 describe("Scene model", () => {
   it("should be a valid scene", async () => {
     const scene = new Scene({
-      name: faker.random.word(),
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      name: random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()],
       metadata: createMetadata("user")
     });
@@ -18,10 +18,10 @@ describe("Scene model", () => {
 
   it("should throw validation error cast character to object id", async () => {
     const scene = new Scene({
-      name: faker.random.word(),
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      name: random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: ["string"],
       metadata: createMetadata("user")
     });
@@ -32,9 +32,9 @@ describe("Scene model", () => {
 
   it("should throw validation error because scene has no name", async () => {
     const scene = new Scene({
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()],
       metadata: createMetadata("user")
     });

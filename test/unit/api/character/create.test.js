@@ -1,4 +1,4 @@
-const faker = require("faker");
+const random = require("../../../shared/random");
 const { ObjectId } = require("mongoose").Types;
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Character = require("../../../../src/models/Character");
@@ -21,10 +21,10 @@ describe("Character module - create", () => {
 
   it("should create a character", async () => {
     const char = {
-      name: faker.random.word(),
-      gender: faker.random.arrayElement(["male", "female"]),
-      description: faker.lorem.sentence(),
-      center: faker.random.arrayElement(["mental", "emotional", "instintive"]),
+      name: random.name(),
+      gender: random.arrayElement(["male", "female"]),
+      description: random.description(),
+      center: random.arrayElement(["mental", "emotional", "instintive"]),
       book: ObjectId()
     };
     const { status, body } = await httpRequest("POST", getUrl(), char);
@@ -35,9 +35,9 @@ describe("Character module - create", () => {
 
   it("should fail validation cause no name was provided", async () => {
     const char = {
-      gender: faker.random.arrayElement(["male", "female"]),
-      description: faker.lorem.sentence(),
-      center: faker.random.arrayElement(["mental", "emotional", "instintive"]),
+      gender: random.arrayElement(["male", "female"]),
+      description: random.description(),
+      center: random.arrayElement(["mental", "emotional", "instintive"]),
       book: ObjectId()
     };
 
@@ -56,10 +56,10 @@ describe("Character module - create", () => {
 
   it("should fail validation cause center is not valid", async () => {
     const char = {
-      name: faker.random.word(),
-      gender: faker.random.arrayElement(["male", "female"]),
-      description: faker.lorem.sentence(),
-      center: faker.random.word(),
+      name: random.word(),
+      gender: random.arrayElement(["male", "female"]),
+      description: random.description(),
+      center: random.word(),
       book: ObjectId()
     };
 
@@ -80,11 +80,11 @@ describe("Character module - create", () => {
 
   it("should fail validation cause book is not an id", async () => {
     const char = {
-      name: faker.random.word(),
-      gender: faker.random.arrayElement(["male", "female"]),
-      description: faker.lorem.sentence(),
-      center: faker.random.arrayElement(["mental", "emotional", "instintive"]),
-      book: faker.random.word()
+      name: random.word(),
+      gender: random.arrayElement(["male", "female"]),
+      description: random.description(),
+      center: random.arrayElement(["mental", "emotional", "instintive"]),
+      book: random.word()
     };
 
     const { status, body } = await httpRequest("POST", getUrl(), char);
@@ -100,11 +100,11 @@ describe("Character module - create", () => {
 
   it("should fail because aft.user is not valid role", async () => {
     const char = {
-      name: faker.random.word(),
-      gender: faker.random.arrayElement(["male", "female"]),
-      description: faker.lorem.sentence(),
-      center: faker.random.arrayElement(["mental", "emotional", "instintive"]),
-      book: faker.random.word()
+      name: random.word(),
+      gender: random.arrayElement(["male", "female"]),
+      description: random.description(),
+      center: random.arrayElement(["mental", "emotional", "instintive"]),
+      book: random.word()
     };
 
     const { status, body } = await httpRequest("POST", getUrl(), char, "user");
