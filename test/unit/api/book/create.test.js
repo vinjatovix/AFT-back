@@ -1,18 +1,18 @@
-const faker = require("faker");
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Book = require("../../../../src/models/Book");
 const Repository = require("../../../../src/api/book/repository");
 const validateModel = require("../../../fixtures/validateModel");
 const { BookSchema } = require("../../../../src/api/book/swagger");
+const random = require("../../../shared/random");
 const getUrl = () => `/api/v1/book`;
 
 jest.mock("../../../../src/db/connectDB", () => ({
   connectDB: () => true
 }));
 
-const name = faker.name.firstName();
-const author = faker.name.firstName();
-const description = faker.lorem.sentence();
+const name = random.name();
+const author = random.name();
+const description = random.description();
 
 describe("Book module - create", () => {
   beforeEach(() => {

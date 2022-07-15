@@ -1,4 +1,4 @@
-const faker = require("faker");
+const random = require("../../../shared/random");
 const { ObjectId } = require("mongoose").Types;
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Scene = require("../../../../src/models/Scene");
@@ -17,10 +17,10 @@ describe("Scene module - create", () => {
 
   it("should create a scene", async () => {
     const scene = {
-      name: faker.random.word(),
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      name: random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()]
     };
     const { status, body } = await httpRequest("POST", getUrl(), scene);
@@ -31,9 +31,9 @@ describe("Scene module - create", () => {
 
   it("should fail validation cause no name was provided", async () => {
     const scene = {
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()]
     };
 
@@ -46,16 +46,16 @@ describe("Scene module - create", () => {
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
       errors: ["Scene validation failed: name: Path `name` is required."],
-      status: 400,
+      status: 400
     });
   });
 
   it("should fail validation for characters with invalid object ids", async () => {
     const scene = {
-      name: faker.random.word(),
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      name: random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId(), "invalid"]
     };
 
@@ -67,16 +67,16 @@ describe("Scene module - create", () => {
       code: "E201",
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
-      status: 400,
+      status: 400
     });
   });
 
   it("should fails because aft.user is not a valid role", async () => {
     const scene = {
-      name: faker.random.word(),
-      description: faker.random.word(),
-      location: faker.random.word(),
-      time: faker.random.word(),
+      name: random.word(),
+      description: random.word(),
+      location: random.word(),
+      time: random.word(),
       characters: [ObjectId()]
     };
 
@@ -87,7 +87,7 @@ describe("Scene module - create", () => {
       module: "authorization",
       code: "E4",
       id: "INVALID_ROLE",
-      message: "Role not allowed",
+      message: "Role not allowed"
     });
 
     expect(Repository.create).not.toHaveBeenCalled();

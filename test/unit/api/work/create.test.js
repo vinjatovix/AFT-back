@@ -1,10 +1,10 @@
-const faker = require("faker");
 const { ObjectId } = require("mongoose").Types;
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Work = require("../../../../src/models/Work");
 const Repository = require("../../../../src/api/work/repository");
 const validateModel = require("../../../fixtures/validateModel");
 const { createMetadata } = require("../../../../src/api/common/shared");
+const random = require("../../../shared/random");
 
 const getUrl = () => `/api/v1/work`;
 
@@ -19,12 +19,12 @@ describe("Work module - create", () => {
   it("should create a work", async () => {
     const work = {
       scene: ObjectId(),
-      description: faker.random.word(),
+      description: random.word(),
       character: ObjectId(),
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word()
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word()
     };
     const { status, body } = await httpRequest("POST", getUrl(), work);
 
@@ -34,12 +34,12 @@ describe("Work module - create", () => {
 
   it("should fail validation cause no scene was provided", async () => {
     const work = {
-      description: faker.random.word(),
+      description: random.word(),
       character: ObjectId(),
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word()
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word()
     };
     const { status, body } = await httpRequest("POST", getUrl(), work);
 
@@ -50,19 +50,19 @@ describe("Work module - create", () => {
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
       errors: ["Work validation failed: scene: Path `scene` is required."],
-      status: 400,
+      status: 400
     });
   });
 
   it("should fail because scene is and invalid object id", async () => {
     const work = {
       scene: "invalid",
-      description: faker.random.word(),
+      description: random.word(),
       character: ObjectId(),
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word()
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word()
     };
     const { status, body } = await httpRequest("POST", getUrl(), work);
 
@@ -72,19 +72,19 @@ describe("Work module - create", () => {
       code: "E201",
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
-      status: 400,
+      status: 400
     });
   });
 
   it("should fail because character is an invalid object id", async () => {
     const work = {
       scene: ObjectId(),
-      description: faker.random.word(),
+      description: random.word(),
       character: "invalid",
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word()
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word()
     };
 
     const { status, body } = await httpRequest("POST", getUrl(), work);
@@ -102,12 +102,12 @@ describe("Work module - create", () => {
   it("should work even if role is aft.user", async () => {
     const work = {
       scene: ObjectId(),
-      description: faker.random.word(),
+      description: random.word(),
       character: ObjectId(),
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word(),
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word(),
       aftUser: "invalid"
     };
 

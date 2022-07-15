@@ -1,12 +1,12 @@
 const { ObjectId } = require("mongoose").Types;
 const { createMetadata } = require("../../../src/api/common/shared");
 const Character = require("../../../src/models/Character");
-const faker = require("faker");
+const random = require("../../shared/random");
 
 describe("Character model", () => {
   it("should be a valid Book", async () => {
     const character = new Character({
-      name: faker.random.word(),
+      name: random.word(),
       book: ObjectId(),
       center: "mental",
       metadata: createMetadata("user")
@@ -25,7 +25,7 @@ describe("Character model", () => {
 
   it("should fail if no book is provided", async () => {
     const character = new Character({
-      name: faker.random.word(),
+      name: random.word(),
       center: "mental",
       metadata: createMetadata("user")
     });
@@ -34,7 +34,7 @@ describe("Character model", () => {
 
   it("should fail if center is not valid", async () => {
     const character = new Character({
-      name: faker.random.word(),
+      name: random.word(),
       book: ObjectId(),
       center: "oniric",
       metadata: createMetadata("user")
@@ -46,7 +46,7 @@ describe("Character model", () => {
 
   it("should fail if center is not provided", async () => {
     const character = new Character({
-      name: faker.random.word(),
+      name: random.word(),
       book: ObjectId(),
       metadata: createMetadata("user")
     });
