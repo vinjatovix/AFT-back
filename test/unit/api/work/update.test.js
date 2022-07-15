@@ -1,4 +1,4 @@
-const faker = require("faker");
+const random = require("../../../shared/random");
 const { ObjectId } = require("mongoose").Types;
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Repository = require("../../../../src/api/work/repository");
@@ -15,12 +15,12 @@ describe("Work module - update", () => {
   it("should update a valid work", async () => {
     const work = {
       scene: ObjectId(),
-      description: faker.random.word(),
+      description: random.word(),
       character: ObjectId(),
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word()
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word()
     };
     const { status } = await httpRequest("PATCH", getUrl(work.name), work);
 
@@ -30,12 +30,12 @@ describe("Work module - update", () => {
   it("should update even if role is aft.user", async () => {
     const work = {
       scene: ObjectId(),
-      description: faker.random.word(),
+      description: random.word(),
       character: ObjectId(),
-      actionUnits: [faker.random.word()],
-      previousCircumstances: [faker.random.word()],
-      animal: faker.random.word(),
-      referent: faker.random.word()
+      actionUnits: [random.word()],
+      previousCircumstances: [random.word()],
+      animal: random.word(),
+      referent: random.word()
     };
     const { status } = await httpRequest("PATCH", getUrl(work.name), work, "user");
 
