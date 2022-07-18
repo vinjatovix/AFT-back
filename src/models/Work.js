@@ -24,7 +24,10 @@ const workSchema = new Schema(
     actionUnits: {
       type: [
         {
-          type: String
+          order: { type: Number },
+          action: {
+            type: String
+          }
         }
       ]
     },

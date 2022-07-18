@@ -30,7 +30,7 @@ const createdCharacterExample = {
 };
 
 const responses = {
-  unauthorized: { [HTTP_UNAUTHORIZED]: makeExample("Unauthorized", unauthorizedResponse()) },
+  unauthorized: { [HTTP_UNAUTHORIZED]: unauthorizedResponse },
   notFound: { [HTTP_NOT_FOUND]: makeExample("Not Found", notFoundResponse("62c062af519e0805cbdeefaa", "Character")) },
   badRequest: { [HTTP_BAD_REQUEST]: makeExample("Bad Request", badRequestResponse("Character", "name")) },
   conflict: { [HTTP_CONFLICT]: makeExample("Conflict", duplicatedResponse("characters", "name")) }
@@ -62,7 +62,8 @@ module.exports = {
       ...responses.unauthorized
     },
     deleteCharacter: {
-      [HTTP_NO_CONTENT]: makeExample("Character deleted", createdCharacterExample)
+      [HTTP_NO_CONTENT]: makeExample("Character deleted", createdCharacterExample),
+      ...responses.unauthorized
     },
     getCharactersByBookId: {
       [HTTP_OK]: makeExample("Character found", [createdCharacterExample])

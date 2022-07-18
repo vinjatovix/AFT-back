@@ -29,7 +29,7 @@ const CreatedBookExample = {
 };
 
 const responses = {
-  unauthorized: { [HTTP_UNAUTHORIZED]: makeExample("Unauthorized", unauthorizedResponse()) },
+  unauthorized: { [HTTP_UNAUTHORIZED]: unauthorizedResponse },
   notFound: { [HTTP_NOT_FOUND]: makeExample("Not Found", notFoundResponse("62c062af519e0805cbdeefaa", "Book")) },
   badRequest: { [HTTP_BAD_REQUEST]: makeExample("Bad Request", badRequestResponse("Book", "author")) },
   conflict: { [HTTP_CONFLICT]: makeExample("Conflict", duplicatedResponse("books", "name")) }

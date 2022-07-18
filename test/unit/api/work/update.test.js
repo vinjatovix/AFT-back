@@ -17,7 +17,7 @@ describe("Work module - update", () => {
       scene: ObjectId(),
       description: random.word(),
       character: ObjectId(),
-      actionUnits: [random.word()],
+      actionUnits: [{ order: 0, action: random.word() }],
       previousCircumstances: [random.word()],
       animal: random.word(),
       referent: random.word()
@@ -32,7 +32,7 @@ describe("Work module - update", () => {
       scene: ObjectId(),
       description: random.word(),
       character: ObjectId(),
-      actionUnits: [random.word()],
+      actionUnits: [{ order: 0, action: random.word() }],
       previousCircumstances: [random.word()],
       animal: random.word(),
       referent: random.word()
