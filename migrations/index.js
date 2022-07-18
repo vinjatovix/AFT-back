@@ -1,15 +1,23 @@
 const { database, config, up: migrationUp } = require("migrate-mongo");
 const logger = require("../src/service/logger");
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_REPLICA_SET } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_REPLICA_SET, NODE_ENV } = process.env;
+const password = encodeURIComponent(DB_PASSWORD);
 
-const connectionString = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}?replicaSet=${DB_REPLICA_SET}`;
+const base = `${DB_USER}:${password}@${DB_HOST}/${DB_DATABASE}`;
+
+const connectionString =
+  NODE_ENV === "development"
+    ? `mongodb://${base}?authSource=${DB_DATABASE}&ssl=false&replicaSet=${DB_REPLICA_SET}`
+    : `mongodb+srv://${base}?retryWrites=true&w=majority`;
+
 const version = require("../package.json").version;
 const configs = require("../config/cfg.json");
 
 config.set({
   mongodb: {
     url: connectionString,
+    databaseName: DB_DATABASE,
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true
