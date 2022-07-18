@@ -50,7 +50,7 @@ const deleteCharacter = {
 
 module.exports = {
   CharacterSchema,
+  CharacterTag,
   CharacterRoutes: { get: getCharacters, post: postCharacter },
-  characterSlugRoutes: { get: getCharacterBySlug, patch: patchCharacter, delete: deleteCharacter },
-  CharacterTag: CharacterTag
+  characterSlugRoutes: { get: getCharacterBySlug, patch: patchCharacter, delete: deleteCharacter }
 };

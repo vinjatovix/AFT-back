@@ -13,8 +13,8 @@ const {
 } = require("../../api/users/swagger");
 
 const { BookSchema, BookTag, BookRoutes, bookSlugRoutes } = require("../../api/book/swagger");
-
 const { CharacterSchema, CharacterTag, CharacterRoutes, characterSlugRoutes } = require("../../api/character/swagger");
+const { WorkSchema, WorkTag, WorkRoutes, workSlugRoutes } = require("../../api/work/swagger");
 
 const more = {
   name,
@@ -48,7 +48,7 @@ module.exports = {
         info,
         servers: [{ url: `http://${HOST}:${PORT}/api/v1` }],
         security: { bearerAuth: [] },
-        tags: [more, AuthenticationTag, UserTag, BookTag, CharacterTag],
+        tags: [more, AuthenticationTag, UserTag, BookTag, CharacterTag, WorkTag],
         paths: {
           "/authentication/login": loginUser,
           "/credentials": getCredentials,
@@ -58,13 +58,15 @@ module.exports = {
           "/book": BookRoutes,
           "/book/{slug}": bookSlugRoutes,
           "/character": CharacterRoutes,
-          "/character/{slug}": characterSlugRoutes
+          "/character/{slug}": characterSlugRoutes,
+          "/work": WorkRoutes,
+          "/work/{slug}": workSlugRoutes
         },
         components: {
           securitySchemes: {
             bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "JWT" }
           },
-          schemas: { Book: BookSchema, User: UserSchema, Character: CharacterSchema }
+          schemas: { Book: BookSchema, User: UserSchema, Character: CharacterSchema, Work: WorkSchema }
         }
       }
     }

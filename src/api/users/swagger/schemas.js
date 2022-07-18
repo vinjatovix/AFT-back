@@ -83,7 +83,7 @@ const updatePasswordSchema = {
 };
 
 const responses = {
-  unauthorized: { [HTTP_UNAUTHORIZED]: makeExample("Unauthorized", unauthorizedResponse()) },
+  unauthorized: { [HTTP_UNAUTHORIZED]: unauthorizedResponse },
   notFound: { [HTTP_NOT_FOUND]: makeExample("Not Found", notFoundResponse("62c062af519e0805cbdeefaa", "User")) },
   badRequest: { [HTTP_BAD_REQUEST]: makeExample("Bad Request", badRequestResponse("User", "username")) },
   conflict: { [HTTP_CONFLICT]: makeExample("Conflict", duplicatedResponse("users", "username")) }
