@@ -243,14 +243,14 @@ const duplicatedResponse = (collection, key) => ({
   status: HTTP_CONFLICT
 });
 
-const unauthorizedResponse = () => ({
+const unauthorizedResponse = {
   error: "Unauthorized. Are you logged in?",
   module: "authorization",
   code: "E1",
   id: "TOKEN_REQUIRED",
   message: "Unauthorized. Are you logged in?",
   status: HTTP_UNAUTHORIZED
-});
+};
 
 const badRequestResponse = (model, prop) => ({
   status: HTTP_BAD_REQUEST,
@@ -265,7 +265,7 @@ module.exports = {
   makeExample,
   notFoundResponse,
   duplicatedResponse,
-  unauthorizedResponse,
+  unauthorizedResponse: makeExample("unauthorized", unauthorizedResponse),
   badRequestResponse,
   get: (schema, parameters = {}) => ({
     parameters: getParameters(parameters),

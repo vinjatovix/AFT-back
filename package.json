@@ -16,6 +16,9 @@
   "keywords": [],
   "author": "vinjatovix@gmail.com",
   "license": "ISC",
+  "engines": {
+    "node": "12.22.12"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commit-message-validator",

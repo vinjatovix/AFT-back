@@ -12,19 +12,19 @@ const findAll = async (ctx, next) => {
   await next();
 };
 
-const findById = async (ctx, next) => {
-  ctx.body = await Service.findById(ctx.params.id);
+const findBySlug = async (ctx, next) => {
+  ctx.body = await Service.findBySlug(ctx.params.slug);
   await next();
 };
 
 const findOneAndUpdate = async (ctx, next) => {
-  ctx.body = await Service.findOneAndUpdate(ctx.params.id, ctx.request.body, ctx.state.userData.username);
+  ctx.body = await Service.findOneAndUpdate(ctx.params.slug, ctx.request.body, ctx.state.userData.username);
   ctx.status = httpStatusCodes.HTTP_OK;
   await next();
 };
 
 const findOneAndDelete = async (ctx, next) => {
-  ctx.body = await Service.findOneAndDelete(ctx.params.id, ctx.state.userData.username);
+  ctx.body = await Service.findOneAndDelete(ctx.params.slug, ctx.state.userData.username);
   ctx.status = httpStatusCodes.HTTP_NO_CONTENT;
   await next();
 };
@@ -32,7 +32,7 @@ const findOneAndDelete = async (ctx, next) => {
 module.exports = {
   create,
   findAll,
-  findById,
+  findBySlug,
   findOneAndUpdate,
   findOneAndDelete
 };
