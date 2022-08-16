@@ -1,6 +1,7 @@
 const Koa = require("koa");
 const cors = require("@koa/cors");
-
+const serve = require("koa-static");
+const mount = require("koa-mount");
 const koaLogger = require("koa-logger-winston");
 const logger = require("./logger");
 
@@ -20,6 +21,11 @@ const workRouter = require("../api/work/router").routes();
 const usersRouter = require("../api/users/router").routes();
 
 const service = new Koa();
+
+const static_pages = new Koa();
+static_pages.use(serve(__dirname + "/../../public")); //serve the build directory
+console.log(__dirname + "/../../public");
+service.use(mount("/", static_pages));
 
 service
   .use(errorHandler)
