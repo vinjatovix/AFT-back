@@ -5,9 +5,14 @@
   </a>
 </p>
 
-[![Release](https://heroku-badge.herokuapp.com/?app=aft-back)](https://heroku-badge.herokuapp.com/?app=aft-back)
-[![Tests CI](https://github.com/vinjatovix/AFT-back/actions/workflows/tests.yml/badge.svg?branch=develop&event=push)](https://github.com/vinjatovix/AFT-back/actions/workflows/tests.yml)
-[![CodeQL](https://github.com/vinjatovix/AFT-back/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/vinjatovix/AFT-back/actions/workflows/codeql-analysis.yml)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=bugs)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
 
 # WIP
 
