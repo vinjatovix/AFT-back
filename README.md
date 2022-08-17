@@ -5,35 +5,109 @@
   </a>
 </p>
 
+[![Tests CI](https://github.com/vinjatovix/AFT-back/actions/workflows/tests.yml/badge.svg?branch=develop&event=push)](https://github.com/vinjatovix/AFT-back/actions/workflows/tests.yml)
+[![CodeQL](https://github.com/vinjatovix/AFT-back/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/vinjatovix/AFT-back/actions/workflows/codeql-analysis.yml)
+
 # WIP
 
-## 🏠 [Homepage](https://github.com/vinjatovix/AFT-back)
+# 🏠 [Homepage](https://github.com/vinjatovix/AFT-back)
+## Project URLs
 
-## Introduction and motivation
+[Lastest Release](https://aft-back.herokuapp.com)
+
+[Swagger UI](https://aft-back.herokuapp.com/doc)
+
+[Release changelog](https://github.com/vinjatovix/AFT-back/compare/0.0.1...0.1.0)
+
+[Github Back](https://github.com/vinjatovix/AFT-back)
+
+[Github Front](https://github.com/vinjatovix/aft-front)
+
+
+
+# Introduction and motivation
 
 REST API for the management of Productions tasks on AFT
 
-## Architecture and Technical Design
+# Architecture and Technical Design
+
+WIP
+## Folder structure
+
+    .
+    ├── .github
+    │   ├── workflows
+    │   └── dependabot.yml
+    ├── .husky
+    │   ├── _
+    │   └── ...
+    ├── config                              # App configurations
+    │   └── cfg.json
+    ├── migrations                          # Migrations by semantic versioning
+    │   ├── x.x.x
+    │   └── ...
+    ├── mongodb                             # Directory for docker
+    │   ├── data
+    │   │   ├── db                          # Docker volume
+    │   │   ├── dump                        # Dumps by environment
+    │   │   │   ├── PRO
+    │   │   │   └── ...
+    │   │   └── log
+    │   ├── scripts                         # Docker DB management scripts
+    │   └── docker-compose.yml
+    ├── public                              # Compiled react files from front build
+    ├── src
+    │   ├── api
+    │   │   ├── common                      # Common files across the api
+    │   │   │   ├── shared
+    │   │   │   ├── swagger
+    │   │   │   │   ├── index.js
+    │   │   │   │   └── schemas.js
+    │   │   │   └── repository.js
+    │   │   └── ...                         # Entity Folder
+    │   │       ├── swagger
+    │   │       │   ├── index.js
+    │   │       │   └── schemas.js
+    │   │       ├── controller.js
+    │   │       ├── repository.js
+    │   │       ├── router.js
+    │   │       └── service.js
+    │   ├── db                              # Database files
+    │   ├── middlewares
+    │   ├── models
+    │   ├── service
+    │   │   ├── swagger                     # Main swagger UI folder
+    │   │   ├── service.js                  # Koa service
+    │   │   └── ...
+    │   ├── services                        # Other services
+    │   ├── main.js
+    │   └── ...
+    ├── tasks                               # Release and others
+    ├── test
+    │   ├── fixtures
+    │   ├── shared
+    │   └── unit
+    │       ├── api
+    │       │   └── ...                     # Entity test folder
+    │       │       └── xxx.test.js
+    │       ├── models
+    │       │   └── Model.test.js
+    │       └── services
+    │           └── xxx.test.js
+    ├── README.md
+    └── ...
+
+# Getting started
 
 WIP
 
-## Getting started
+## Prerequisites
 
-WIP
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/es/) v12.16.1
+- [Node.js](https://nodejs.org/es/) v12.22.12
 - [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm)
 - [EditorConfig editor plugin](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-### First steps
-
-WIP
-At the moment, the first AFT admin user must be manually created by a DB admin.
-AFT admin user can create another admins, editors or normal users as well.
-
-### Local development
+## Local development
 
 A `.env_EXAMPLE` is provided, but the application needs a `.env`, so you can do:
 
@@ -41,27 +115,50 @@ A `.env_EXAMPLE` is provided, but the application needs a `.env`, so you can do:
 $ cp .env_EXAMPLE .env
 ```
 
-This action will provide you all the configuration needed to start the application in a local environment, except the secrets.
+Fullfilling this file will provide you all the configuration needed
+to start the application in a local environment, except the secrets.
 Due to security concerns, we can't keep secrets (passwords) in the codebase.
 
-With `npm run docker` a mongo with replica set is started locally.
+On the first run, an admin user is created with the .env parameters.
 
-### Usage
+### For set up a mongo docker.
+
+```sh
+$ npm run docker
+```
+
+### Dumping ENV DB to docker
+
+```sh
+$ npm run restoreDB $ENV $PASSWORD
+```
+
+Several environments copies can be stored locally and you can restore them anytime with:
+
+```sh
+$ npm run restoreDump $ENV
+```
+
+## Usage
 
 ```sh
 $ npm start
 ```
 
-### Run tests
+## Run tests
 
 ```sh
+$ npm run test
+
 $ npm run test:coverage
 ```
 
-<!--
-### Folder structure
 
-### Project URLs
+
+
+
+
+<!--
 
 #### Swagger
 

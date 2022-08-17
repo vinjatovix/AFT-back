@@ -15,7 +15,9 @@
     "test:ci": "jest --ci --forceExit --reporters='default' --reporters='./github-actions-reporter'",
     "docker": "docker-compose -f ./mongodb/docker-compose.yml up --build -d",
     "prepare-release": "./tasks/prepare-release",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "restoreDB": "./mongodb/scripts/restoreDB.sh",
+    "restoreDump": "./mongodb/scripts/restoreDump.sh"
   },
   "keywords": [],
   "author": "vinjatovix@gmail.com",
