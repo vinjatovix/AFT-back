@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node app",
     "check-dependencies": "./node_modules/.bin/madge --circular ./src",
-    "test": "jest -c jest.config.js --forceExit",
+    "test": "jest -c jest.config.js --coverage --forceExit",
     "test:coverage": "jest -c jest.config.js --coverage --forceExit",
     "test:ci": "jest --ci --forceExit --reporters='default' --reporters='./github-actions-reporter'",
     "docker": "docker-compose -f ./mongodb/docker-compose.yml up --build -d",
@@ -46,6 +46,7 @@
     "commit-message-validator": "^1.0.2",
     "husky": "^7.0.4",
     "jest": "^28.1.3",
+    "jest-sonar-reporter": "^2.0.0",
     "madge": "^5.0.1",
     "supertest": "^6.2.4"
   },

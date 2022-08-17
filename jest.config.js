@@ -4,10 +4,12 @@ module.exports = {
   modulePathIgnorePatterns: ["<rootDir>/.yarn_cache"],
   setupFiles: ["<rootDir>/test/fixtures/setup.js"],
   snapshotSerializers: [],
-  collectCoverage: false,
+  collectCoverage: true,
   coverageDirectory: "coverage",
   collectCoverageFrom: ["src/**/*.js"],
   coverageReporters: ["text", "html", "lcov", "clover"],
   watchPathIgnorePatterns: ["<rootDir>/test-report.json"],
-  reporters: ["default"]
+  reporters: ["default"],
+  testResultsProcessor: "jest-sonar-reporter",
+  coveragePathIgnorePatterns: ["/node_modules/", "/test/"]
 };
