@@ -1,22 +1,28 @@
 <h1 align="center">Welcome to Adestramento Actoral FT BackEnd 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
-    <!-- <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" /> -->
-  </a>
-</p>
-
-
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=bugs)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
-
-# WIP
 
 # 🏠 [Homepage](https://github.com/vinjatovix/AFT-back)
+
+[![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](https://heroku-badge.herokuapp.com/?app=heroku-badge)
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://shields.io/)
+[![GitHub release](https://img.shields.io/github/release/vinjatovix/AFT-back.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=bugs)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=vinjatovix_AFT-back&metric=coverage)](https://sonarcloud.io/summary/new_code?id=vinjatovix_AFT-back)
+
+[![GitHub issues](https://img.shields.io/github/issues/vinjatovix/AFT-back.svg)](https://GitHub.com/Naereen/StrapDown.js/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/vinjatovix/AFT-back.svg)](https://GitHub.com/Naereen/StrapDown.js/issues?q=is%3Aissue+is%3Aclosed)
+
 ## Project URLs
 
 [Lastest Release](https://aft-back.herokuapp.com)
@@ -29,8 +35,6 @@
 
 [Github Front](https://github.com/vinjatovix/aft-front)
 
-
-
 # Introduction and motivation
 
 REST API for the management of Productions tasks on AFT
@@ -38,6 +42,7 @@ REST API for the management of Productions tasks on AFT
 # Architecture and Technical Design
 
 WIP
+
 ## Folder structure
 
     .
@@ -158,11 +163,6 @@ $ npm run test
 
 $ npm run test:coverage
 ```
-
-
-
-
-
 
 <!--
 
