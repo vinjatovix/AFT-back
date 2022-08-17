@@ -6,7 +6,7 @@ const {
 } = require("../../service/httpStatusCodes").httpStatusCodes;
 
 module.exports = {
-  valid: code => /^E2[0-9][1-9]/.test(code),
+  valid: code => /^E2\d[1-9]/.test(code),
   module: "mongoose",
   errors: rep => [
     {
