@@ -64,7 +64,7 @@ describe("Book module - create", () => {
     });
   });
 
-  it("sould fail because no description is provided", async () => {
+  it("should fail because no description is provided", async () => {
     const { status, body } = await httpRequest("POST", getUrl(), {
       name,
       author
