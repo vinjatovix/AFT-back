@@ -39,7 +39,7 @@
   },
   "config": {
     "commit-message-validator": {
-      "pattern": "^\\[AFT-[\\d]+\\]\\s.*$",
+      "pattern": "^\\[AFTF-[\\d]+\\]\\s.*$",
       "errorMessage": "Invalid commit message. Valid example: [AFT-123] Fix typo"
     }
   },
@@ -84,6 +84,5 @@
     "qs": "^6.11.0",
     "querystring": "^0.2.1",
     "winston": "^3.6.0"
-  },
-  "type": "module"
+  }
 }

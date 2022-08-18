@@ -1,4 +1,3 @@
-const { getQueryBySlug } = require("../common/swagger/schemas");
 const Repository = require("./repository");
 
 const create = async (payload, user) => Repository.create(payload, user);

@@ -1,12 +1,5 @@
 const getOptions = options => {
-  const {
-    select = null,
-    session = null,
-    populate = null,
-    sort = null,
-    lean,
-    pagination
-  } = options;
+  const { select = null, session = null, populate = null, sort = null, lean, pagination } = options;
   const hasPopulation = populate && populate.some(query => query.populate);
 
   return {

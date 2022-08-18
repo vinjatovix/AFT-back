@@ -1,5 +1,5 @@
-const { get, post, del, put } = require("../../common/swagger");
-const { UserSchema, responses, LoginSchema, credentialsSchema, updatePasswordSchema } = require("./schemas");
+const { get, post, put } = require("../../common/swagger");
+const { UserSchema, responses, credentialsSchema, updatePasswordSchema } = require("./schemas");
 
 const UserTag = { name: "user", description: "App Users" };
 const AuthenticationTag = { name: "authentication", description: "Authentication" };

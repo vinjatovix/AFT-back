@@ -1,5 +1,3 @@
-const { MetadataSchema, patternId } = require("./schemas");
-
 const {
   HTTP_BAD_REQUEST,
   HTTP_CREATED,
@@ -12,6 +10,7 @@ const {
   HTTP_UNPROCESSABLE_ENTITY,
   HTTP_INTERNAL_SERVER_ERROR
 } = require("../../../service/httpStatusCodes").httpStatusCodes;
+const { MetadataSchema, patternId } = require("./schemas");
 
 const RESPONSES = {
   [HTTP_OK]: "OK",

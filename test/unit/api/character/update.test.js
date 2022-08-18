@@ -30,7 +30,7 @@ describe("Character module - update", () => {
       code: "E4",
       id: "INVALID_ROLE",
       message: "Role not allowed",
-      status: 403,
+      status: 403
     });
   });
 });

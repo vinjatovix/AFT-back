@@ -24,6 +24,7 @@ yarn.lock
 
 # Test
 test-report.json
+test-report.xml
 coverage
 
 # Docker

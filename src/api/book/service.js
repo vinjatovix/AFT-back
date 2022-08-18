@@ -1,9 +1,9 @@
-const Repository = require("./repository");
 const CharacterRepository = require("../character/repository");
 const WorkRepository = require("../work/repository");
 const SceneRepository = require("../scene/repository");
 const { throwAftError } = require("../../services/throwAftError");
 const { withTransaction } = require("../../db/helpers");
+const Repository = require("./repository");
 
 const create = async (payload, user) => Repository.create(payload, user);
 

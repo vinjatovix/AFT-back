@@ -1,5 +1,5 @@
-const random = require("../../../shared/random");
 const { ObjectId } = require("mongoose").Types;
+const random = require("../../../shared/random");
 const httpRequest = require("../../../fixtures/httpRequest")();
 const Character = require("../../../../src/models/Character");
 const Repository = require("../../../../src/api/character/repository");

@@ -1,9 +1,5 @@
-const {
-  HTTP_BAD_REQUEST,
-  HTTP_CONFLICT,
-  HTTP_INTERNAL_SERVER_ERROR,
-  HTTP_UNAUTHORIZED
-} = require("../../service/httpStatusCodes").httpStatusCodes;
+const { HTTP_BAD_REQUEST, HTTP_CONFLICT, HTTP_INTERNAL_SERVER_ERROR, HTTP_UNAUTHORIZED } =
+  require("../../service/httpStatusCodes").httpStatusCodes;
 
 module.exports = {
   valid: code => /^E2\d[1-9]/.test(code),

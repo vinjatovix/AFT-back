@@ -1,5 +1,5 @@
 const { version, license, name, description, author } = require("../../../package.json");
-const { HOST, PORT } = process.env;
+const { HOST } = process.env;
 
 const {
   UserSchema,
