@@ -1,10 +1,21 @@
-const prettierConfig = require("./prettier.config");
+const prettierConfig = require("./prettier.config.cjs");
 
 module.exports = {
-  parser: "babel-eslint",
+  parser: "@babel/eslint-parser",
+  parserOptions: {
+    ecmaVersion: 8,
+    requireConfigFile: false,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      impliedStrict: true,
+      classes: true
+    }
+  },
   env: {
     node: true,
-    es6: true
+    es6: true,
+    browser: true,
+    jest: true
   },
   plugins: ["prettier", "jest"],
   extends: ["unobtrusive", "unobtrusive/import", "prettier"],
@@ -22,9 +33,6 @@ module.exports = {
   overrides: [
     {
       files: ["test/**/*.js"],
-      env: {
-        "jest/globals": true
-      },
       globals: {
         expectedExports: true
       },
@@ -45,10 +53,8 @@ module.exports = {
         "jest/no-identical-title": "error",
         "jest/no-jest-import": "error",
         "jest/no-test-return-statement": "error",
-        "jest/prefer-to-be-null": "warn",
-        "jest/prefer-to-be-undefined": "warn",
         "jest/prefer-to-have-length": "warn",
-        "jest/valid-describe": "error",
+        "jest/valid-describe-callback": "error",
         "jest/valid-expect": "error"
       }
     }
