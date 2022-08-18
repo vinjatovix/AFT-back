@@ -21,4 +21,6 @@ const findOneAndUpdate = (slug, payload, user, options) =>
 const findOneAndDelete = (slug, user, options) =>
   CommonRepository.findOneAndDelete(Character, getQueryBySlug(slug, getUniqueIdentifiers(Character)), user, options);
 
-module.exports = { create, findByQuery, findOneAndUpdate, findOneAndDelete, findBySlug };
+const remove = (ids, user, options) => CommonRepository.remove(Character, { _id: { $in: ids } }, user, options);
+
+module.exports = { create, findByQuery, findOneAndUpdate, findOneAndDelete, findBySlug, remove };

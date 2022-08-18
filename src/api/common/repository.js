@@ -82,4 +82,13 @@ const findOneAndDelete = (Model, query, user, options = {}) => {
     .catch(error => throwError(error, { query, name: Model.modelName }));
 };
 
-module.exports = { create, findByQuery, findOneByQuery, findOneAndUpdate, findOneAndDelete };
+const remove = (Model, query, user, options = {}) => {
+  return Model.deleteMany(query, { ...options, user })
+    .then(doc => {
+      loggerInfo(options, Model.modelName, user, "remove", query);
+      return options.json ? toJSON(doc) : doc;
+    })
+    .catch(error => throwError(error, { query, name: Model.modelName }));
+};
+
+module.exports = { create, findByQuery, findOneByQuery, findOneAndUpdate, findOneAndDelete, remove };
