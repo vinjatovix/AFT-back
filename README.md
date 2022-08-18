@@ -29,7 +29,8 @@
 
 [Swagger UI](https://aft-back.herokuapp.com/doc)
 
-[Release changelog](https://github.com/vinjatovix/AFT-back/compare/0.0.1...0.1.0)
+[Release changelog](https://github.com/vinjatovix/AFT-back/compare/0.1.0...0.1.1)
+[Release changelog](https://github.com/vinjatovix/aft-front/compare/0.1.0...0.1.1)
 
 [Github Back](https://github.com/vinjatovix/AFT-back)
 

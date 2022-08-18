@@ -1,6 +1,6 @@
 {
   "name": "aft",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "engines": {
     "node": "12.22.12",
     "npm": "6.14.4"
@@ -39,7 +39,7 @@
   },
   "config": {
     "commit-message-validator": {
-      "pattern": "^\\[AFTF-[\\d]+\\]\\s.*$",
+      "pattern": "^\\[AFT-[\\d]+\\]\\s.*$",
       "errorMessage": "Invalid commit message. Valid example: [AFT-123] Fix typo"
     }
   },
