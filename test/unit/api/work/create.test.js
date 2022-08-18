@@ -3,7 +3,6 @@ const httpRequest = require("../../../fixtures/httpRequest")();
 const Work = require("../../../../src/models/Work");
 const Repository = require("../../../../src/api/work/repository");
 const validateModel = require("../../../fixtures/validateModel");
-const { createMetadata } = require("../../../../src/api/common/shared");
 const random = require("../../../shared/random");
 
 const getUrl = () => `/api/v1/work`;

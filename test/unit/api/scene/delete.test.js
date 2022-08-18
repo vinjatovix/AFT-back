@@ -24,7 +24,7 @@ describe("Scene module - delete", () => {
       code: "E4",
       id: "INVALID_ROLE",
       message: "Role not allowed",
-      status: 403,
+      status: 403
     });
   });
 });

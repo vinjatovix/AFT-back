@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require("mongoose-schema-jsonschema")(mongoose);
-const Metadata = require("./Metadata");
 const { allowedRoles } = require("../../config/cfg.json").aft;
+const Metadata = require("./Metadata");
 
 const { Schema, model } = mongoose;
 const modelName = "User";

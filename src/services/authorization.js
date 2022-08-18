@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
+const { allowedRoles } = require("../../config/cfg.json").aft;
 const { throwAftError } = require("./throwAftError");
 
-const { allowedRoles } = require("../../config/cfg.json").aft;
 const secret = process.env.SECRET;
 const expiresIn = +process.env.EXPIRES || 300000;
 

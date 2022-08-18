@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { connectDB } = require("./connectDB");
 const { throwAftError } = require("../services/throwAftError");
+const { connectDB } = require("./connectDB");
 const { dbErrors } = require("./dbErrors");
 
 const throwError = (error, info) => {

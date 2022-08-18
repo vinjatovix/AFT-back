@@ -1,6 +1,6 @@
 const KoaRouter = require("koa-router");
-const Controller = require("./controller");
 const { tokenAuth, getCredentials, authAdmin, authAnyRole } = require("../../middlewares/authorization");
+const Controller = require("./controller");
 
 const authRouter = new KoaRouter();
 
