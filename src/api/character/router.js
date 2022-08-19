@@ -1,8 +1,6 @@
 const KoaRouter = require("koa-router");
+const { include, filter, pagination, validateBody, selectFields } = require("../../middlewares");
 const { authAnyRole, authEditor, getCredentials, tokenAuth } = require("../../middlewares/authorization");
-const { filter } = require("../../middlewares/filter");
-const { include } = require("../../middlewares/include");
-const { validateBody } = require("../../middlewares/validateBody");
 const Controller = require("./controller");
 
 const characterRouter = new KoaRouter();
@@ -10,11 +8,11 @@ const characterRouter = new KoaRouter();
 characterRouter
   .prefix("/api/v1/character")
   .use(tokenAuth, getCredentials)
-  .get("/", authAnyRole, include, filter, Controller.findAll)
+  .get("/", authAnyRole, include, filter, selectFields, pagination, Controller.findAll)
   .post("/", authEditor, include, validateBody, Controller.create)
-  .get("/:id", authAnyRole, include, Controller.findById)
-  .patch("/:id", authEditor, include, Controller.findOneAndUpdate)
+  .get("/:id", authAnyRole, include, selectFields, Controller.findById)
+  .patch("/:id", authEditor, include, validateBody, Controller.findOneAndUpdate)
   .del("/:id", authEditor, Controller.findOneAndDelete)
-  .get("/book/:id", authAnyRole, include, filter, Controller.findByBookId);
+  .get("/book/:id", authAnyRole, include, filter, selectFields, Controller.findByBookId);
 
 module.exports = characterRouter;

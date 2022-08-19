@@ -1,41 +1,43 @@
-const { ObjectId } = require("mongoose").Types;
-const random = require("../../../shared/random");
 const httpRequest = require("../../../fixtures/httpRequest")();
-const Scene = require("../../../../src/models/Scene");
-const Repository = require("../../../../src/api/scene/repository");
 const validateModel = require("../../../fixtures/validateModel");
+const CommonRepository = require("../../../../src/api/common/repository");
+const Scene = require("../../../../src/models/Scene");
+const random = require("../../../shared/random");
 
 const getUrl = () => `/api/v1/scene`;
 
+const DEFAULT_SCENE = {
+  name: random.word(),
+  description: random.word(),
+  location: random.word(),
+  time: random.word(),
+  characters: [random.mongoId().toString()]
+};
+
 describe("Scene module - create", () => {
   beforeEach(() => {
-    Repository.create = jest.fn(async (payload, user) => {
-      await validateModel(Scene, payload, user);
+    CommonRepository.create = jest.fn(async (SceneModel, payload, user) => {
+      await validateModel(SceneModel, payload, user);
       return payload;
     });
   });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it("should create a scene", async () => {
-    const scene = {
-      name: random.word(),
-      description: random.word(),
-      location: random.word(),
-      time: random.word(),
-      characters: [ObjectId()]
-    };
+    const scene = { ...DEFAULT_SCENE };
+
     const { status, body } = await httpRequest("POST", getUrl(), scene);
 
     expect(status).toBe(201);
     expect(body).toMatchObject(scene);
+    expect(CommonRepository.create).toHaveBeenCalledWith(Scene, scene, "userTest", expect.any(Object));
   });
 
   it("should fail validation cause no name was provided", async () => {
-    const scene = {
-      description: random.word(),
-      location: random.word(),
-      time: random.word(),
-      characters: [ObjectId()]
-    };
+    const scene = { ...DEFAULT_SCENE };
+    delete scene.name;
 
     const { status, body } = await httpRequest("POST", getUrl(), scene);
 
@@ -51,13 +53,7 @@ describe("Scene module - create", () => {
   });
 
   it("should fail validation for characters with invalid object ids", async () => {
-    const scene = {
-      name: random.word(),
-      description: random.word(),
-      location: random.word(),
-      time: random.word(),
-      characters: [ObjectId(), "invalid"]
-    };
+    const scene = { ...DEFAULT_SCENE, characters: [random.word()] };
 
     const { status, body } = await httpRequest("POST", getUrl(), scene);
 
@@ -72,15 +68,7 @@ describe("Scene module - create", () => {
   });
 
   it("should fails because aft.user is not a valid role", async () => {
-    const scene = {
-      name: random.word(),
-      description: random.word(),
-      location: random.word(),
-      time: random.word(),
-      characters: [ObjectId()]
-    };
-
-    const { status, body } = await httpRequest("POST", getUrl(), scene, "user");
+    const { status, body } = await httpRequest("POST", getUrl(), DEFAULT_SCENE, "user");
 
     expect(status).toBe(403);
     expect(body).toMatchObject({
@@ -90,6 +78,6 @@ describe("Scene module - create", () => {
       message: "Role not allowed"
     });
 
-    expect(Repository.create).not.toHaveBeenCalled();
+    expect(CommonRepository.create).not.toHaveBeenCalled();
   });
 });
