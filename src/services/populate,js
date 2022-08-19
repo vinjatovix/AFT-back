@@ -57,12 +57,26 @@ const _parseCompositionsFields = fields => {
 
 const _mapFieldToPath = fieldLevel => {
   switch (fieldLevel) {
-    case "book":
-      return { path: "book" };
-    case "characters":
-      return { path: "characters" };
+    case "character":
+      return {
+        path: "character",
+        select: ["-metadata"],
+        populate: {
+          path: "book",
+          select: ["-metadata"]
+        }
+      };
+    case "scene":
+      return {
+        path: "scene",
+        select: ["-metadata"],
+        populate: {
+          path: "characters",
+          select: ["-metadata", "-book"]
+        }
+      };
     default:
-      return { path: fieldLevel };
+      return { path: fieldLevel, select: ["-metadata"] };
   }
 };
 
