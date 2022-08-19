@@ -12,8 +12,8 @@ sceneRouter
   .use(tokenAuth, getCredentials)
   .get("/", authAnyRole, include, filter, Controller.findAll)
   .post("/", authEditor, include, validateBody, Controller.create)
-  .get("/:slug", authAnyRole, include, Controller.findBySlug)
-  .patch("/:slug", authEditor, include, validateBody, Controller.findOneAndUpdate)
-  .del("/:slug", authEditor, Controller.findOneAndDelete);
+  .get("/:id", authAnyRole, include, Controller.findById)
+  .patch("/:id", authEditor, include, validateBody, Controller.findOneAndUpdate)
+  .del("/:id", authEditor, Controller.findOneAndDelete);
 
 module.exports = sceneRouter;
