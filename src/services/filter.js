@@ -32,6 +32,12 @@ const _convertToDotNotation = (obj, currentName) =>
     };
   }, {});
 
+const generateRegex = string =>
+  string
+    .split(" ")
+    .map(word => `(?=.*(${word}))`)
+    .join("");
+
 const _convertValue = value => {
   switch (_getOperator(value)) {
     case "":
@@ -41,11 +47,9 @@ const _convertValue = value => {
     case ",":
       return { $in: value.split(",").map(item => item.trim()) };
     case "~":
-      const regex = value.slice(1).split(" ").join(".*");
-
-      return { $regex: regex, $options: "/i" };
+      return { $regex: generateRegex(value.slice(1)), $options: "/ig" };
     case "!~":
-      return { $not: { $regex: value.slice(2), $options: "/i" } };
+      return { $not: { $regex: generateRegex(value.slice(2)), $options: "/ig" } };
     case ">":
       return { $gt: value.slice(1) };
     case "<":

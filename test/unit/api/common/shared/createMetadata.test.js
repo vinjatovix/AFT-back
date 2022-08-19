@@ -1,4 +1,4 @@
-const { createMetadata } = require("../../../../src/api/common/shared/createMetadata");
+const { createMetadata } = require("../../../../../src/api/common/shared/createMetadata");
 
 describe("createMetadata", () => {
   it("should match return for a creation from an user on a date", () => {

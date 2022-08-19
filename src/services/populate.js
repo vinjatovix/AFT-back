@@ -45,23 +45,24 @@ const _mapFieldToPath = fieldLevel => {
     case "character":
       return {
         path: "character",
-        select: ["-metadata"],
         populate: {
-          path: "book",
-          select: ["-metadata"]
+          path: "book"
         }
       };
     case "scene":
       return {
         path: "scene",
-        select: ["-metadata"],
         populate: {
-          path: "characters",
-          select: ["-metadata", "-book"]
+          path: "characters"
         }
       };
+    case "full-scene":
+      return [
+        { path: "scene", populate: { path: "characters" } },
+        { path: "character", populate: { path: "book" } }
+      ];
     default:
-      return { path: fieldLevel, select: ["-metadata"] };
+      return { path: fieldLevel };
   }
 };
 

@@ -1,27 +1,40 @@
 const httpRequest = require("../../../fixtures/httpRequest")();
-const Repository = require("../../../../src/api/book/repository");
-const getUrl = slug => `/api/v1/book/${slug}`;
+const CommonRepository = require("../../../../src/api/common/repository");
+const Book = require("../../../../src/models/Book");
+const random = require("../../../shared/random");
+
+const getUrl = _slug => `/api/v1/book/${_slug}`;
+
+const slug = random.name();
+const name = random.name();
 
 describe("Book module - update", () => {
   beforeEach(() => {
-    Repository.findOneAndUpdate = jest.fn(async payload => {
+    CommonRepository.findOneAndUpdate = jest.fn(async (_Model, _query, payload) => {
       return payload;
     });
   });
-  it("should update a book", async () => {
-    const slug = "uno";
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  it("should update a book", async () => {
     const { status } = await httpRequest("PATCH", getUrl(slug), {
-      name: "Uno"
+      name
     });
 
     expect(status).toBe(200);
+    expect(CommonRepository.findOneAndUpdate).toHaveBeenCalledWith(
+      Book,
+      { name: slug },
+      { name },
+      "userTest",
+      expect.any(Object)
+    );
   });
 
   it("should fail because aft.user is not valid role", async () => {
-    const slug = "uno";
-
-    const { status, body } = await httpRequest("PATCH", getUrl(slug), { name: "Uno" }, "user");
+    const { status, body } = await httpRequest("PATCH", getUrl(slug), { name }, "user");
 
     expect(status).toBe(403);
     expect(body).toMatchObject({

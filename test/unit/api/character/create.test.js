@@ -1,45 +1,53 @@
-const { ObjectId } = require("mongoose").Types;
-const random = require("../../../shared/random");
 const httpRequest = require("../../../fixtures/httpRequest")();
-const Character = require("../../../../src/models/Character");
-const Repository = require("../../../../src/api/character/repository");
 const validateModel = require("../../../fixtures/validateModel");
+const Character = require("../../../../src/models/Character");
+const CommonRepository = require("../../../../src/api/common/repository");
+const random = require("../../../shared/random");
 
 const getUrl = () => `/api/v1/character`;
 
-jest.mock("../../../../src/db/connectDB", () => ({
-  connectDB: () => true
-}));
+const DEFAULT_CHARACTER = {
+  name: random.name(),
+  gender: random.arrayElement(["male", "female"]),
+  description: random.description(),
+  center: random.arrayElement(["mental", "emotional", "instintive"]),
+  book: random.mongoId().toString()
+};
 
 describe("Character module - create", () => {
   beforeEach(() => {
-    Repository.create = jest.fn(async (payload, user) => {
-      await validateModel(Character, payload, user);
+    CommonRepository.create = jest.fn(async (CharacterModel, payload, user) => {
+      await validateModel(CharacterModel, payload, user);
       return payload;
+    });
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("should fail with error code E32", async () => {
+    const { status, body } = await httpRequest("POST", getUrl());
+
+    expect(status).toBe(400);
+    expect(body).toMatchObject({
+      module: "general",
+      code: "E32",
+      id: "BODY_INVALID",
+      status: 400
     });
   });
 
   it("should create a character", async () => {
-    const char = {
-      name: random.name(),
-      gender: random.arrayElement(["male", "female"]),
-      description: random.description(),
-      center: random.arrayElement(["mental", "emotional", "instintive"]),
-      book: ObjectId()
-    };
-    const { status, body } = await httpRequest("POST", getUrl(), char);
+    const { status, body } = await httpRequest("POST", getUrl(), DEFAULT_CHARACTER);
 
     expect(status).toBe(201);
-    expect(body).toMatchObject(char);
+    expect(body).toMatchObject(DEFAULT_CHARACTER);
+    expect(CommonRepository.create).toHaveBeenCalledWith(Character, DEFAULT_CHARACTER, "userTest", expect.any(Object));
   });
 
   it("should fail validation cause no name was provided", async () => {
-    const char = {
-      gender: random.arrayElement(["male", "female"]),
-      description: random.description(),
-      center: random.arrayElement(["mental", "emotional", "instintive"]),
-      book: ObjectId()
-    };
+    const char = { ...DEFAULT_CHARACTER };
+    delete char.name;
 
     const { status, body } = await httpRequest("POST", getUrl(), char);
 
@@ -55,13 +63,7 @@ describe("Character module - create", () => {
   });
 
   it("should fail validation cause center is not valid", async () => {
-    const char = {
-      name: random.word(),
-      gender: random.arrayElement(["male", "female"]),
-      description: random.description(),
-      center: random.word(),
-      book: ObjectId()
-    };
+    const char = { ...DEFAULT_CHARACTER, center: random.word() };
 
     const { status, body } = await httpRequest("POST", getUrl(), char);
 
@@ -79,13 +81,7 @@ describe("Character module - create", () => {
   });
 
   it("should fail validation cause book is not an id", async () => {
-    const char = {
-      name: random.word(),
-      gender: random.arrayElement(["male", "female"]),
-      description: random.description(),
-      center: random.arrayElement(["mental", "emotional", "instintive"]),
-      book: random.word()
-    };
+    const char = { ...DEFAULT_CHARACTER, book: random.word() };
 
     const { status, body } = await httpRequest("POST", getUrl(), char);
 
@@ -99,15 +95,7 @@ describe("Character module - create", () => {
   });
 
   it("should fail because aft.user is not valid role", async () => {
-    const char = {
-      name: random.word(),
-      gender: random.arrayElement(["male", "female"]),
-      description: random.description(),
-      center: random.arrayElement(["mental", "emotional", "instintive"]),
-      book: random.word()
-    };
-
-    const { status, body } = await httpRequest("POST", getUrl(), char, "user");
+    const { status, body } = await httpRequest("POST", getUrl(), DEFAULT_CHARACTER, "user");
 
     expect(status).toBe(403);
     expect(body).toMatchObject({
