@@ -2,9 +2,9 @@ const Repository = require("./repository");
 
 const create = async (payload, user) => Repository.create(payload, user);
 
-const findAll = async options => Repository.findByQuery({}, { lean: true, ...options });
+const findAll = async (filter, options) => Repository.findByQuery(filter, { json: true, ...options });
 
-const findBySlug = async (slug, options) => Repository.findBySlug(slug, { lean: true, ...options });
+const findBySlug = async (slug, options) => Repository.findBySlug(slug, { json: true, ...options });
 
 const findOneAndUpdate = async (slug, payload, user, options) =>
   Repository.findOneAndUpdate(slug, payload, user, options);

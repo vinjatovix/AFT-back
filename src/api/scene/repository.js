@@ -8,15 +8,15 @@ const create = (payload, user, options) => CommonRepository.create(Scene, payloa
 
 const findByQuery = (query, options) => CommonRepository.findByQuery(Scene, query, options);
 
-const findBySlug = (slug, options) =>
-  CommonRepository.findBySlug(Scene, getQueryBySlug(slug, UniqueIdentifiers), options);
+const findById = (id, user, options) =>
+  CommonRepository.findOneByQuery(Scene, getQueryBySlug(id, UniqueIdentifiers), user, options);
 
-const findOneAndUpdate = (slug, payload, user, options) =>
-  CommonRepository.findOneAndUpdate(Scene, getQueryBySlug(slug, UniqueIdentifiers), payload, user, options);
+const findOneAndUpdate = (id, payload, user, options) =>
+  CommonRepository.findOneAndUpdate(Scene, getQueryBySlug(id, UniqueIdentifiers), payload, user, options);
 
-const findOneAndDelete = (slug, user, options) =>
-  CommonRepository.findOneAndDelete(Scene, getQueryBySlug(slug, UniqueIdentifiers), user, options);
+const findOneAndDelete = (id, user, options) =>
+  CommonRepository.findOneAndDelete(Scene, getQueryBySlug(id, UniqueIdentifiers), user, options);
 
 const remove = (ids, user, options) => CommonRepository.remove(Scene, { _id: { $in: ids } }, user, options);
 
-module.exports = { create, findByQuery, findBySlug, findOneAndUpdate, findOneAndDelete, remove };
+module.exports = { create, findByQuery, findById, findOneAndUpdate, findOneAndDelete, remove };
