@@ -29,12 +29,13 @@
 
 [Swagger UI](https://aft-back.herokuapp.com/doc)
 
-[Release changelog](https://github.com/vinjatovix/AFT-back/compare/0.1.0...0.1.1)
-[Release changelog](https://github.com/vinjatovix/aft-front/compare/0.1.0...0.1.1)
-
 [Github Back](https://github.com/vinjatovix/AFT-back)
 
+[Release back changelog](https://github.com/vinjatovix/AFT-back/compare/0.1.1...0.1.2)
+
 [Github Front](https://github.com/vinjatovix/aft-front)
+
+[Release front changelog](https://github.com/vinjatovix/aft-front/compare/0.1.1...0.1.2)
 
 # Introduction and motivation
 
@@ -127,7 +128,7 @@ A `.env_EXAMPLE` is provided, but the application needs a `.env`, so you can do:
 $ cp .env_EXAMPLE .env
 ```
 
-Fullfilling this file will provide you all the configuration needed
+Full filling this file will provide you all the configuration needed
 to start the application in a local environment, except the secrets.
 Due to security concerns, we can't keep secrets (passwords) in the codebase.
 
@@ -164,16 +165,6 @@ $ npm run test
 
 $ npm run test:coverage
 ```
-
-<!--
-
-#### Swagger
-
-#### Validation Checks
-
-### Useful links
-
-### Log management, Metrics and Tracing -->
 
 ## Preparing a release
 

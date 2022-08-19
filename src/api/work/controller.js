@@ -8,7 +8,8 @@ const create = async (ctx, next) => {
 };
 
 const findAll = async (ctx, next) => {
-  ctx.body = await Service.findAll();
+  const { populate } = ctx.state;
+  ctx.body = await Service.findAll({ populate });
   await next();
 };
 
