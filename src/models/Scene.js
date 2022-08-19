@@ -9,17 +9,19 @@ const sceneSchema = new Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
       trim: true
     },
     description: {
-      type: String
+      type: String,
+      trim: true
     },
     location: {
-      type: String
+      type: String,
+      trim: true
     },
     time: {
-      type: String
+      type: String,
+      trim: true
     },
     characters: {
       type: [

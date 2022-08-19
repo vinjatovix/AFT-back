@@ -33,7 +33,11 @@ const findBySlug = async (ctx, next) => {
 };
 
 const findOneAndUpdate = async (ctx, next) => {
-  ctx.body = await Service.findOneAndUpdate(ctx.params.slug, ctx.request.body, ctx.state.userData.username);
+  const { select, populate } = ctx.state || {};
+  ctx.body = await Service.findOneAndUpdate(ctx.params.slug, ctx.request.body, ctx.state.userData.username, {
+    populate,
+    select
+  });
   await next();
 };
 

@@ -1,4 +1,4 @@
-const { getPopulateOptions } = require("../services/populate,js");
+const { getPopulateOptions } = require("../services/populate.js");
 
 module.exports = {
   include: async (ctx, next) => {

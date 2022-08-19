@@ -1,7 +1,7 @@
 const getPopulateOptions = fields => {
   let paths = [];
 
-  _parseCompositionsFields(fields).forEach(field => {
+  fields.forEach(field => {
     const populateObject = {};
     field.split(".").reduce((populateLevel, fieldLevel, index) => {
       const populate = _mapFieldToPath(fieldLevel);
@@ -38,21 +38,6 @@ const _getPopulateValues = populatesMap => {
     ...populate,
     populate: _getPopulateValues(populate.populate)
   }));
-};
-const _parseCompositionsFields = fields => {
-  let allFields = [...fields];
-  const compositionsIndex = allFields.indexOf("compositions");
-  if (compositionsIndex > -1) {
-    allFields.splice(compositionsIndex, 1); // Remove compositions from includes
-    allFields = [...allFields, ...compositionsPopulate];
-    if (fields.includes("mirrorOf")) {
-      allFields = [
-        ...allFields,
-        ...compositionsPopulate.map(compositionsPopulate => `mirrorOf.${compositionsPopulate}`)
-      ];
-    }
-  }
-  return allFields;
 };
 
 const _mapFieldToPath = fieldLevel => {
