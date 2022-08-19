@@ -1,14 +1,11 @@
 const httpRequest = require("../../../fixtures/httpRequest")();
-const Book = require("../../../../src/models/Book");
-const Repository = require("../../../../src/api/book/repository");
 const validateModel = require("../../../fixtures/validateModel");
-const { BookSchema } = require("../../../../src/api/book/swagger");
+const Book = require("../../../../src/models/Book");
+const CommonRepository = require("../../../../src/api/common/repository");
 const random = require("../../../shared/random");
-const getUrl = () => `/api/v1/book`;
+const { BookSchema } = require("../../../../src/api/book/swagger");
 
-jest.mock("../../../../src/db/connectDB", () => ({
-  connectDB: () => true
-}));
+const getUrl = () => `/api/v1/book`;
 
 const name = random.name();
 const author = random.name();
@@ -16,20 +13,23 @@ const description = random.description();
 
 describe("Book module - create", () => {
   beforeEach(() => {
-    Repository.create = jest.fn(async (payload, user) => {
-      await validateModel(Book, payload, user);
+    CommonRepository.create = jest.fn(async (BookModel, payload, user) => {
+      await validateModel(BookModel, payload, user);
       return payload;
     });
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it("swagger example should pass", async () => {
     const example = BookSchema.example;
-    const { status, body } = await httpRequest("POST", getUrl(), {
-      ...example
-    });
+
+    const { status, body } = await httpRequest("POST", getUrl(), example);
 
     expect(status).toBe(201);
     expect(body).toMatchObject({ ...BookSchema.example });
+    expect(CommonRepository.create).toHaveBeenCalledWith(Book, example, "userTest", undefined);
   });
 
   it("should fail validation cause no author is provided", async () => {
@@ -37,6 +37,7 @@ describe("Book module - create", () => {
       name,
       description
     });
+
     expect(status).toBe(400);
     expect(body).toMatchObject({
       module: "mongoose",
@@ -53,6 +54,7 @@ describe("Book module - create", () => {
       author,
       description
     });
+
     expect(status).toBe(400);
     expect(body).toMatchObject({
       module: "mongoose",
@@ -69,6 +71,7 @@ describe("Book module - create", () => {
       name,
       author
     });
+
     expect(status).toBe(400);
     expect(body).toMatchObject({
       module: "mongoose",
@@ -81,15 +84,7 @@ describe("Book module - create", () => {
   });
 
   it("should fail because aft.user is not a valid role", async () => {
-    const { status, body } = await httpRequest(
-      "POST",
-      getUrl(),
-      {
-        name,
-        author
-      },
-      "user"
-    );
+    const { status, body } = await httpRequest("POST", getUrl(), { name, author }, "user");
 
     expect(status).toBe(403);
     expect(body).toMatchObject({

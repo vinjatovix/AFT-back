@@ -27,7 +27,7 @@ const create = (Model, payload, user, options = {}) => {
     .catch(throwError);
 };
 
-const findByQuery = (Model, query, options = { lean: true }) => {
+const findByQuery = (Model, query, user, options = { lean: true }) => {
   const { select, populate, lean, sort, limit = defaultLimit, skip } = getOptions(options);
 
   return Model.find(query)
@@ -37,7 +37,11 @@ const findByQuery = (Model, query, options = { lean: true }) => {
     .limit(limit || Number(options.limit))
     .skip(skip)
     .lean(lean)
-    .exec()
+    .then(doc => {
+      checkIfExist(doc, JSON.stringify(query), "find", Model.modelName);
+      loggerInfo(options, Model.modelName, user, "findByQuery", query);
+      return options.json ? toJSON(doc) : doc;
+    })
     .catch(throwError);
 };
 

@@ -3,7 +3,7 @@ const CommonRepository = require("../common/repository");
 
 const create = (payload, user, options) => CommonRepository.create(Character, payload, user, options);
 
-const findByQuery = (query, options) => CommonRepository.findByQuery(Character, query, options);
+const findByQuery = (query, user, options) => CommonRepository.findByQuery(Character, query, user, options);
 
 const findById = (_id, user, options) => CommonRepository.findOneByQuery(Character, { _id }, user, options);
 

@@ -10,7 +10,10 @@ const _createWithSession = async ({ username, password, roles }, user, options) 
   Repository.create({ username, password: encryptPassword(password), roles }, user, options);
 
 const login = async (username, password) => {
-  const dbUser = await Repository.findOneByQuery({ username }, { select: ["password", "roles"], lean: true });
+  const dbUser = await Repository.findOneByQuery({ username }, "un-logged", {
+    select: ["password", "roles"],
+    lean: true
+  });
   if (!dbUser) {
     throwAftError("INVALID_CREDENTIALS");
   }
@@ -23,16 +26,19 @@ const update = async (model, user, options) => {
   return withTransaction(async session => _updateWithSession(model, user, { session, lean: true, ...options }));
 };
 
-const _updateWithSession = async ({ password, newPassword, repeatNewPassword }, username, options) => {
+const _updateWithSession = async ({ password, newPassword, repeatNewPassword }, user, options) => {
   if (!(password && newPassword && repeatNewPassword && newPassword === repeatNewPassword)) {
     throwAftError("DATA_INVALID");
   }
-  const { password: dbPassword } = await Repository.findOneByQuery({ username }, { select: ["password"], lean: true });
+  const { password: dbPassword } = await Repository.findOneByQuery({ username: user }, user, {
+    select: ["password"],
+    lean: true
+  });
   await validatePassword(password, dbPassword);
   const res = await Repository.findOneAndUpdate(
-    { username },
-    { password: encryptPassword(newPassword), metadata: { updatedAt: new Date(), updatedBy: username } },
-    username,
+    { username: user },
+    { password: encryptPassword(newPassword), metadata: { updatedAt: new Date(), updatedBy: user } },
+    user,
     options
   );
   delete res.password;

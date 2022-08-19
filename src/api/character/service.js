@@ -2,11 +2,12 @@ const Repository = require("./repository");
 
 const create = async (payload, user, options) => Repository.create(payload, user, options);
 
-const findAll = async (filter, options) => Repository.findByQuery(filter, { lean: true, ...options });
+const findAll = async (filter, user, options) => Repository.findByQuery(filter, user, { lean: true, ...options });
 
 const findById = async (id, user, options) => Repository.findById(id, user, { lean: true, ...options, exists: true });
 
-const findByBookId = async (bookId, options) => Repository.findByQuery({ book: bookId }, { lean: true, ...options });
+const findByBookId = async (bookId, user, options) =>
+  Repository.findByQuery({ book: bookId }, user, { lean: true, ...options });
 
 const findOneAndUpdate = async (id, payload, user, options) => Repository.findOneAndUpdate(id, payload, user, options);
 

@@ -6,10 +6,10 @@ const UniqueIdentifiers = getUniqueIdentifiers(Work);
 
 const create = (payload, user, options) => CommonRepository.create(Work, payload, user, options);
 
-const findByQuery = (query, options) => CommonRepository.findByQuery(Work, query, options);
+const findByQuery = (query, user, options) => CommonRepository.findByQuery(Work, query, user, options);
 
-const findBySlug = (slug, options) =>
-  CommonRepository.findOneByQuery(Work, getQueryBySlug(slug, UniqueIdentifiers), options);
+const findBySlug = (slug, user, options) =>
+  CommonRepository.findOneByQuery(Work, getQueryBySlug(slug, UniqueIdentifiers), user, options);
 
 const findOneAndUpdate = (slug, payload, user, options) =>
   CommonRepository.findOneAndUpdate(Work, getQueryBySlug(slug, UniqueIdentifiers), payload, user, options);
