@@ -6,6 +6,15 @@ const { Schema, model } = mongoose;
 
 const sceneSchema = new Schema(
   {
+    book: {
+      type: Schema.Types.ObjectId,
+      ref: "Book",
+      required: true
+    },
+    order: {
+      type: Number,
+      required: true
+    },
     name: {
       type: String,
       required: true,
@@ -13,15 +22,18 @@ const sceneSchema = new Schema(
     },
     description: {
       type: String,
-      trim: true
+      trim: true,
+      required: true
     },
     location: {
       type: String,
-      trim: true
+      trim: true,
+      required: true
     },
     time: {
       type: String,
-      trim: true
+      trim: true,
+      required: true
     },
     characters: {
       type: [
