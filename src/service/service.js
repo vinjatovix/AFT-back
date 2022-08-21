@@ -19,7 +19,7 @@ const { Swagger } = require("./swagger");
 const service = new Koa();
 
 const static_pages = new Koa();
-static_pages.use(serve(__dirname + "/../../public")); //serve the build directory
+static_pages.use(serve(__dirname + "/../../dist")); //serve the build directory
 service.use(mount("/", static_pages));
 
 service
