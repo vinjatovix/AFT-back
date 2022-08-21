@@ -31,11 +31,11 @@
 
 [Github Back](https://github.com/vinjatovix/AFT-back)
 
-[Release back changelog](https://github.com/vinjatovix/AFT-back/compare/0.1.1...0.1.2)
+[Release back changelog](https://github.com/vinjatovix/AFT-back/compare/0.1.2...0.2.0)
 
 [Github Front](https://github.com/vinjatovix/aft-front)
 
-[Release front changelog](https://github.com/vinjatovix/aft-front/compare/0.1.1...0.1.2)
+[Release front changelog](https://github.com/vinjatovix/aft-front/compare/0.1.2...0.2.0)
 
 # Introduction and motivation
 
