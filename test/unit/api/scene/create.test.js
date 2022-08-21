@@ -7,6 +7,8 @@ const random = require("../../../shared/random");
 const getUrl = () => `/api/v1/scene`;
 
 const DEFAULT_SCENE = {
+  order: 0,
+  book: random.mongoId().toString(),
   name: random.word(),
   description: random.word(),
   location: random.word(),
@@ -63,6 +65,24 @@ describe("Scene module - create", () => {
       code: "E201",
       id: "MONGO_VALIDATION_ERROR",
       message: "Mongoose validation error",
+      status: 400
+    });
+  });
+  // no order was provided
+  it("should fail validation cause no order was provided", async () => {
+    const scene = { ...DEFAULT_SCENE };
+    delete scene.order;
+
+    const { status, body } = await httpRequest("POST", getUrl(), scene);
+
+    expect(status).toBe(400);
+    expect(body).toMatchObject({
+      module: "mongoose",
+      code: "E201",
+      id: "MONGO_VALIDATION_ERROR",
+      message: "Mongoose validation error",
+
+      errors: ["Scene validation failed: order: Path `order` is required."],
       status: 400
     });
   });
