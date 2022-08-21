@@ -1,12 +1,11 @@
 const Koa = require("koa");
 const cors = require("@koa/cors");
-const serve = require("koa-static");
-const mount = require("koa-mount");
 const koaLogger = require("koa-logger-winston");
 const { koaSwagger } = require("koa2-swagger-ui");
 const json = require("koa-json");
 const bodyParser = require("koa-bodyparser");
 const { errorHandler } = require("../middlewares");
+const homeRouter = require("../api/home/router").routes();
 const authRouter = require("../api/authentication/router").routes();
 const bookRouter = require("../api/book/router").routes();
 const characterRouter = require("../api/character/router").routes();
@@ -18,10 +17,6 @@ const { Swagger } = require("./swagger");
 
 const service = new Koa();
 
-const static_pages = new Koa();
-static_pages.use(serve(__dirname + "/../../dist")); //serve the build directory
-service.use(mount("/", static_pages));
-
 service
   .use(errorHandler)
   .use(cors())
@@ -29,6 +24,7 @@ service
   .use(koaSwagger(Swagger))
   .use(json())
   .use(bodyParser())
+  .use(homeRouter)
   .use(authRouter)
   .use(bookRouter)
   .use(characterRouter)
